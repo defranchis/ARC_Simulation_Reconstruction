@@ -20,11 +20,11 @@ At CERN an LCG view provides everything:
 
 ```bash
 source /cvmfs/sft.cern.ch/lcg/views/LCG_107/x86_64-el9-gcc13-opt/setup.sh
-cmake -S . -B build -DCMAKE_CXX_FLAGS="-Wno-error=deprecated"
+cmake -S . -B build
 cmake --build build -j8
 ```
 
-The executables are `build/apps/RunARC` and `build/apps/OptimiseARC`. The project is compiled with `-Werror`; recent ROOT builds force C++20, in which one lambda capture in `src/EndCapRadiatorCell.cpp` is deprecated, hence the extra flag. Drop it if your ROOT was built with C++17.
+The executables are `build/apps/RunARC` and `build/apps/OptimiseARC`. The project is compiled with `-Werror`; ROOT's CMake configuration selects the C++ standard ROOT was built with, so a newer compiler or ROOT can surface new warnings as errors.
 
 ## Settings files
 

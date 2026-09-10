@@ -157,7 +157,7 @@ bool EndCapRadiatorCell::IsDetectorInsideCell() const {
   const double DetSizeX = m_Detector.GetDetectorSizeX();
   const double DetSizeY = m_Detector.GetDetectorSizeY();
   // Function for checking if point is inside hexagon
-  auto IsInsideHexagon = [=] (double x, double y) {
+  auto IsInsideHexagon = [this] (double x, double y) {
     x = TMath::Abs(x);
     y = TMath::Abs(y);
     return x < std::min(m_HexagonSize - y*TMath::Sqrt(3.0), m_HexagonSize*0.5);
