@@ -57,7 +57,7 @@ The first two arguments are the cell column and row. Valid barrel cells are row 
 - `PlotProjections true`: reads `Filename` back and draws the cost as a function of each parameter over `Plot_min`–`Plot_max` to five PDF files.
 - `SinglePoints true`: reads five parameter values from standard input, prints the cost, and asks whether to continue.
 
-All outputs go to the current directory under fixed names, so run each cell in its own directory. The track loop in the cost function runs on `Optimisation/NumberThreads` OpenMP threads; results do not depend on the thread count. One cost evaluation with 20000 tracks takes about 0.12 s on one thread of a 64-core EL9 node, 0.05 s on 4 threads, and about 0.10 s again on 8 or 16 threads (the loop scales poorly beyond 4 threads), so a fit with the committed settings (50 agents, 700 iterations) takes between half an hour and an hour per cell. Two knobs control randomness: `General/Seed` fixes the tracks and photons, `Optimisation/Seed` fixes the search path; runs with identical settings and seeds are bit-identical. Optimising the full detector means one run per cell and merging the resulting lines into `options/RadiatorCell.txt`; the committed values were obtained with 20000 tracks.
+All outputs go to the current directory under fixed names, so run each cell in its own directory. The track loop in the cost function runs on `Optimisation/NumberThreads` OpenMP threads; results do not depend on the thread count. One cost evaluation with 20000 tracks takes about 0.09 s on one thread of a 64-core EL9 node, 0.011 s on 8 threads and 0.005 s on 16, so a fit with the committed settings (50 agents, 700 iterations) takes a few minutes per cell on 8 to 16 threads. Two knobs control randomness: `General/Seed` fixes the tracks and photons, `Optimisation/Seed` fixes the search path; runs with identical settings and seeds are bit-identical. Optimising the full detector means one run per cell and merging the resulting lines into `options/RadiatorCell.txt`; the committed values were obtained with 20000 tracks.
 
 ## RunARC: simulation and reconstruction
 
@@ -73,7 +73,6 @@ All outputs go to the current directory under fixed names, so run each cell in i
 
 ## Known limitations
 
-- The multithreaded track loop in the cost function scales poorly: 4 threads give the shortest evaluation time, 8 or more are slower than 4.
 - `CherenkovTree` uses fixed-size arrays of 2000 photons per track; a track with more photons overflows them and only a warning is printed.
 - `documentation/` contains Doxygen output from an early version of the code and does not cover the current classes; `documentation/Doxyfile` regenerates it.
 

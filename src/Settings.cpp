@@ -98,10 +98,11 @@ std::vector<std::size_t> Settings::GetSizeTVector(const std::string &Setting) {
 }
 
 bool Settings::Exists(const std::string &Setting) {
-  try {
-    GetString(Setting);
-  } catch(const std::runtime_error&) {
+  // Same lookup as GetString, without throwing: this is called per photon
+  const std::size_t SlashPos = Setting.find('/');
+  auto iter1 = m_Settings.find(Setting.substr(0, SlashPos));
+  if(iter1 == m_Settings.end()) {
     return false;
   }
-  return true;
+  return iter1->second.find(Setting.substr(SlashPos + 1)) != iter1->second.end();
 }
