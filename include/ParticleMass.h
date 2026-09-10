@@ -8,7 +8,8 @@
 
 namespace ParticleMass {
   /**
-   * Get the particle mass
+   * Get the particle mass from its PDG code (antiparticles have the same mass)
+   * Throws std::invalid_argument if the code is not known
    */
   double GetMass(int PID);
 }

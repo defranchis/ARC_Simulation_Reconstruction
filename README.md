@@ -5,7 +5,7 @@ Standalone simulation, reconstruction and geometry optimisation of the ARC (Arra
 ## Physics model in brief
 
 - Geometry (`options/ARCGeometry.txt`): a barrel of radius `Radius` and length `Length` carrying two rows of hexagonal cells (`CellsPerRow` in the main row, one fewer plus a half cell in the upper row), and two end caps at `|z| = BarrelZ` with 23 valid cells listed in `include/EndCapRadiatorCell.h`. Tracks with `|cos theta|` below `CosTheta_boundary` belong to the barrel, above it to the end cap. All lengths are in metres, momenta in GeV, angles in radians, photon energies in eV.
-- Each cell (`include/RadiatorCell.h`) is a stack, from the detector plane upwards: cooling plate, aerogel, gas (C4F10, Sellmeier parametrisation), spherical mirror. The SiPM sits on the detector plane at the cell's local origin.
+- Each cell (`include/RadiatorCell.h`) is a stack: the SiPM sits on the detector plane at the cell's local origin, with the 5 mm cooling plate just below it on the beam side; outwards from the detector plane come the aerogel, the gas (C4F10, Sellmeier parametrisation) and, closing the cell, the spherical mirror.
 - Photon yield follows Frank–Tamm with a fixed efficiency factor (`src/ParticleTrack.cpp`, `GetPhotonYield`); photon energy is uniform in 1.55–4.31 eV, the SiPM applies a wavelength-dependent photon-detection efficiency (`src/SiPM.cpp`).
 - Tracks follow a helix if `FieldStrength` is non-zero (`src/HelixPath.cpp`); with the committed value 0.0 they are straight lines.
 - Reconstruction solves the mirror-reflection quartic for each photon (`src/PhotonReconstructor.cpp`), using both the true emission point and the mid-point of the radiator as the assumed emission point.
@@ -69,16 +69,16 @@ All outputs go to the current directory under fixed names, so run each cell in i
 ```
 
 - `CherenkovAngleResolution`: generates `NumberTracks` tracks, traces and reconstructs their photons and writes `CherenkovFile.root` containing `CherenkovTree`, one entry per track: momentum and direction, entrance and mirror-hit points, initial and final cell indices, per-photon true and reconstructed Cherenkov angles (with true and assumed emission point), energies, hit positions, migration flags and status codes, and the per-track single-photon resolution, total resolution and the separation significance between the two mass hypotheses. It also writes an event display PDF of the row selected by `EventDisplay/RowToDraw` with the tracks listed in `General/TrackToDraw`.
-- `SingleTrack`: propagates one track defined by `Particle/Momentum`, `Particle/CosTheta`, `Particle/Phi` and draws its photon hits to `PhotonHits.pdf`. This mode addresses cell (0, 0), which only exists with `General/FullArray false`.
+- `SingleTrack`: propagates one track defined by `Particle/Momentum`, `Particle/CosTheta`, `Particle/Phi` and draws its photon hits on the SiPM of the cell it reaches to `PhotonHits.pdf`.
 
 ## Known limitations
 
-- `CherenkovTree` uses fixed-size arrays of 2000 photons per track; a track with more photons overflows them and only a warning is printed.
-- `documentation/` contains Doxygen output from an early version of the code and does not cover the current classes; `documentation/Doxyfile` regenerates it.
+- `CherenkovTree` stores a fixed maximum number of photons per track (`CherenkovFile::MaxPhotons` in `apps/RunARC.cpp`, currently 2000); further photons are dropped with a warning and do not enter that track's resolution.
 
 ## Repository layout
 
 - `apps/`: the two executables.
 - `include/`, `src/`: the `ARC_Simulation_Reconstruction` library (geometry, tracking, photon generation and mapping, reconstruction, optimisation interface, event display).
 - `options/`: settings files.
+- `documentation/`: Doxygen output (HTML and LaTeX) for the current sources; regenerate with `doxygen documentation/Doxyfile` from the repository root.
 - `include/DifferentialEvolution.h` (differential evolution, by Milos Stojanovic) and `include/Quartic.h`, `src/Quartic.cpp` (quartic solver, by Saša Milenković, GPL) are third-party code.

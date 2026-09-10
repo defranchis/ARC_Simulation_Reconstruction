@@ -1,6 +1,9 @@
 // Martin Duy Tat 1st May 2022
 
 #include<map>
+#include<cstdlib>
+#include<stdexcept>
+#include<string>
 #include"ParticleMass.h"
 
 namespace ParticleMass {
@@ -11,12 +14,12 @@ namespace ParticleMass {
       {321, 0.493677},
       {2212, 0.93827208816}
     };
-    auto iter = Mass.find(PID);
+    // Antiparticles have negative PDG codes and the same mass
+    auto iter = Mass.find(std::abs(PID));
     if(iter == Mass.end()) {
-      return 0.0;
-    } else {
-      return iter->second;
+      throw std::invalid_argument("Unknown particle ID " + std::to_string(PID));
     }
+    return iter->second;
   }
 
 }

@@ -47,19 +47,20 @@ struct CherenkovFile {
   /**
    * All the variables that are saved
    */
-  double CherenkovAngle_Reco_TrueEmissionPoint[2000], CherenkovAngle_Reco[2000],
-         CherenkovAngle_True[2000], PhotonEnergy[2000];
+  static constexpr int MaxPhotons = 2000;
+  double CherenkovAngle_Reco_TrueEmissionPoint[MaxPhotons], CherenkovAngle_Reco[MaxPhotons],
+         CherenkovAngle_True[MaxPhotons], PhotonEnergy[MaxPhotons];
   double Entrance_x, Entrance_y, Entrance_z;
   double MirrorHit_x, MirrorHit_y, MirrorHit_z;
-  double PhotonHit_x[2000], PhotonHit_y[2000], PhotonHit_z[2000];
+  double PhotonHit_x[MaxPhotons], PhotonHit_y[MaxPhotons], PhotonHit_z[MaxPhotons];
   double Momentum, CosTheta, Phi;
   int NumberPhotons = 0;
   double NumberGoodPhotons = 0.0;
-  int HasMigrated[2000];
+  int HasMigrated[MaxPhotons];
   std::size_t RadiatorRowNumber, RadiatorColumnNumber, TrackNumber;
   std::size_t FinalRadiatorRowNumber, FinalRadiatorColumnNumber;
   ParticleTrack::Location ParticleLocation;
-  Photon::Status PhotonStatus[2000];
+  Photon::Status PhotonStatus[MaxPhotons];
   double SinglePhotonResolution, TotalResolution, Significance;
   /**
    * Constructor that prepares the file and tree
@@ -180,18 +181,25 @@ int main(int argc, char *argv[]) {
       std::cout << "Could not track through tracker...\n";
       return 0;
     }
-    particleTrack.FindRadiator(*radiatorArray);
-    particleTrack.ConvertToRadiatorCoordinates();
+    if(!particleTrack.FindRadiator(*radiatorArray)) {
+      std::cout << "Track does not enter any radiator cell...\n";
+      return 0;
+    }
     if(!particleTrack.TrackThroughAerogel()) {
       std::cout << "Could not track through aerogel...\n";
       return 0;
     }
-    particleTrack.TrackThroughGasToMirror();
-    if(particleTrack.GetParticleLocation() != ParticleTrack::Location::Mirror) {
-      particleTrack.TrackToNextCell(*radiatorArray);
-    }
+    // Aerogel photons are generated before the track continues to the mirror
     auto PhotonsAerogel = particleTrack.GeneratePhotonsFromAerogel();
-    auto PhotonsGas = particleTrack.GeneratePhotonsFromGas();
+    particleTrack.TrackThroughGasToMirror();
+    if(particleTrack.GetParticleLocation() != ParticleTrack::Location::Mirror &&
+       !particleTrack.TrackToNextCell(*radiatorArray)) {
+      std::cout << "Track left the radiator array before reaching a mirror...\n";
+      return 0;
+    }
+    auto PhotonsGas =
+      particleTrack.GetParticleLocation() == ParticleTrack::Location::Mirror
+      ? particleTrack.GeneratePhotonsFromGas() : std::vector<Photon>();
     std::vector<PhotonHit> photonHits;
     for(auto &photon : PhotonsAerogel) {
       auto photonHit = PhotonMapper::TracePhoton(photon, *radiatorArray);
@@ -205,7 +213,7 @@ int main(int argc, char *argv[]) {
 	photonHits.push_back(*photonHit);
       }
     }
-    (*radiatorArray)(0, 0)->GetDetector().PlotHits("PhotonHits.pdf", photonHits);
+    particleTrack.GetRadiatorCell()->GetDetector().PlotHits("PhotonHits.pdf", photonHits);
   } else if(RunMode == "CherenkovAngleResolution") {
     std::cout << "Run mode: Cherenkov angle resolution\n";
     CherenkovFile File("CherenkovFile.root");
@@ -299,9 +307,14 @@ int main(int argc, char *argv[]) {
       File.FinalRadiatorColumnNumber = particleTrack.GetRadiatorColumnNumber();
       eventDisplay.AddObject(particleTrack.DrawParticleTrack());
       std::vector<double> GoodAngles;
+      if(Photons.size() > static_cast<std::size_t>(CherenkovFile::MaxPhotons)) {
+	std::cout << "Warning! Track " << i << " has " << Photons.size()
+		  << " photons, only the first " << CherenkovFile::MaxPhotons
+		  << " are stored\n";
+      }
       for(auto &Photon : Photons) {
-	if(File.NumberPhotons >= 2000) {
-	  std::cout << "Warning! Number of photons is greater than 2000\n";
+	if(File.NumberPhotons >= CherenkovFile::MaxPhotons) {
+	  break;
 	}
 	File.CherenkovAngle_True[File.NumberPhotons] =
 	  TMath::ACos(Photon.GetCosCherenkovAngle());
