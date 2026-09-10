@@ -1,0 +1,3 @@
+RowToDraw 1 # Row of radiator cells to draw (barrel: 1 main row, 2 upper row)
+CanvasWidth 1200
+CanvasHeight 900

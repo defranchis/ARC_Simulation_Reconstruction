@@ -1,2 +1,86 @@
 # ARC_Simulation_Reconstruction
-Simulation and reconstruction code for ARC
+
+Standalone simulation, reconstruction and geometry optimisation of the ARC (Array of RICH Cells) detector proposed for FCC-ee. Charged tracks are propagated through a hexagonal array of RICH cells, Cherenkov photons are generated in the radiators, traced via a spherical mirror onto a SiPM plane, and the Cherenkov angle is reconstructed photon by photon. A differential-evolution optimiser tunes the mirror and detector placement of each cell to minimise the Cherenkov-angle resolution.
+
+## Physics model in brief
+
+- Geometry (`options/ARCGeometry.txt`): a barrel of radius `Radius` and length `Length` carrying two rows of hexagonal cells (`CellsPerRow` in the main row, one fewer plus a half cell in the upper row), and two end caps at `|z| = BarrelZ` with 23 valid cells listed in `include/EndCapRadiatorCell.h`. Tracks with `|cos theta|` below `CosTheta_boundary` belong to the barrel, above it to the end cap. All lengths are in metres, momenta in GeV, angles in radians, photon energies in eV.
+- Each cell (`include/RadiatorCell.h`) is a stack, from the detector plane upwards: cooling plate, aerogel, gas (C4F10, Sellmeier parametrisation), spherical mirror. The SiPM sits on the detector plane at the cell's local origin.
+- Photon yield follows Frank–Tamm with a fixed efficiency factor (`src/ParticleTrack.cpp`, `GetPhotonYield`); photon energy is uniform in 1.55–4.31 eV, the SiPM applies a wavelength-dependent photon-detection efficiency (`src/SiPM.cpp`).
+- Tracks follow a helix if `FieldStrength` is non-zero (`src/HelixPath.cpp`); with the committed value 0.0 they are straight lines.
+- Reconstruction solves the mirror-reflection quartic for each photon (`src/PhotonReconstructor.cpp`), using both the true emission point and the mid-point of the radiator as the assumed emission point.
+- Optimisation cost (`src/ResolutionUtilities.cpp`, `CalculateResolution`): mean over tracks of the per-track resolution RMS(theta_c)/sqrt(N_photons), plus a pixel-size term, a penalty proportional to the fraction of tracks whose photons fail to reach the detector (wall or mirror miss, or fewer than two detected photons) and, during the fit, a penalty on the mean distance of the photon hits from the detector centre.
+
+## Requirements and build
+
+- CMake 3.17 or newer, a C++17 compiler with OpenMP.
+- ROOT 6.22 or newer with the Physics, RIO, Tree, Gpad, MathMore, GenVector and Minuit2 components.
+
+At CERN an LCG view provides everything:
+
+```bash
+source /cvmfs/sft.cern.ch/lcg/views/LCG_107/x86_64-el9-gcc13-opt/setup.sh
+cmake -S . -B build -DCMAKE_CXX_FLAGS="-Wno-error=deprecated"
+cmake --build build -j8
+```
+
+The executables are `build/apps/RunARC` and `build/apps/OptimiseARC`. The project is compiled with `-Werror`; recent ROOT builds force C++20, in which one lambda capture in `src/EndCapRadiatorCell.cpp` is deprecated, hence the extra flag. Drop it if your ROOT was built with C++17.
+
+## Settings files
+
+Both programs take settings as pairs `<Name> <file>` on the command line. `<Name>` becomes the prefix of every key in that file, so `Seed 42` in the file passed as `General` is read as `General/Seed`. File syntax: one `Key Value` per line, `#` starts a comment, anything after the second token is ignored. Booleans are the literal `true`; duplicate keys are an error. Six blocks are used; the committed files in `options/` are a working barrel setup.
+
+| Block | Keys (committed value) |
+|---|---|
+| `General` | `Seed` (42), `FullArray` (true: whole array with symmetry mapping; false: a single cell), `NumberTracks` (20000), `TrackToDraw` (comma-separated track numbers shown in the event display), `DrawAllTracks`, `ChromaticDispersion`, `RandomEmissionPoint`, `GasOrAerogel` (Gas), `PhotonMultiplier` (scale on the photon yield), `BarrelOrEndcap` (Barrel), `LowMomentumLimit` (below it the gas yield is boosted 20x, for studies at low momentum), `MassHypothesis1`/`2` (PDG codes for the significance, 211 and 321) |
+| `Particle` | `ID` (PDG code, 211), `ConstantMomentum` (true) with `Momentum` (100), otherwise log-uniform between `Momentum_min` and `Momentum_max`; `RandomPhi` (true) or uniform in `Phi_min`–`Phi_max`; barrel tracks are generated uniformly in `z_min`–`z_max` on the cylinder; `CosTheta` and `Phi` are used only by `RunARC SingleTrack` |
+| `ARCGeometry` | `Radius` (1.91), `Length` (4.362), `CellsPerRow` (9), `FieldStrength` (0.0, tesla), `BarrelZ` (2.01), `EndCapInnerRadius` (0.30), `EndCapOuterRadius` (1.89), `CosTheta_boundary` (0.74) |
+| `RadiatorCell` | `RadiatorThickness` (0.20), `VesselThickness` (0.01), `CoolingThickness` (0.005), `AerogelThickness` (0.01), `MirrorCurvature` (0.37), `DetectorSize` (0.08), then one optimised 5-tuple per cell, `Radiator_c<col>_r<row>_{Curvature,XPosition,ZPosition,DetPosition,DetTilt}` for the barrel and `EndCapRadiator_...` for the end cap |
+| `Optimisation` | `NumberAgents` (50), `Iterations` (700), `DoFit`, `PlotProjections`, `SinglePoints`, `Filename` (FitResults.txt); per parameter `<P>_IsFixed`, `<P>_value`, `<P>_min`, `<P>_max` and `<P>Plot_min`/`<P>Plot_max` for the five parameters `MirrorCurvature`, `MirrorXPosition`, `MirrorZPosition`, `DetectorPosition`, `DetectorTilt` |
+| `EventDisplay` | `RowToDraw` (1), `CanvasWidth` (1200), `CanvasHeight` (900); required by `RunARC`, not required by `OptimiseARC` |
+
+The keys `ARCGeometry/MaxEndCapRadius`, `Particle/FromOrigin` and `General/DrawMissPhoton` appear in the committed files but are not read by the code. `General/BarrelOrEndcap`, `General/GasOrAerogel`, `Particle/ID` and the momentum settings must be changed together; the commented alternatives in the files show the aerogel/kaon setup.
+
+## OptimiseARC: per-cell geometry optimisation
+
+```bash
+mkdir run_c0_r1 && cd run_c0_r1
+../build/apps/OptimiseARC 0 1 \
+    General ../options/General.txt Particle ../options/Particle.txt \
+    ARCGeometry ../options/ARCGeometry.txt RadiatorCell ../options/RadiatorCell.txt \
+    Optimisation ../options/Optimisation.txt
+```
+
+The first two arguments are the cell column and row. Valid barrel cells are row 1 with columns 0–8 and row 2 with columns 1–9; valid end-cap cells are listed in `include/EndCapRadiatorCell.h`. The five parameters are the mirror radius of curvature, the mirror centre shift along the local x and z axes, the detector shift along x and the detector tilt (radians), all relative to the defaults built from `RadiatorCell`. The programme generates `NumberTracks` tracks once and then, depending on the `Optimisation` booleans:
+
+- `DoFit true`: runs differential evolution (`include/DifferentialEvolution.h`) with `NumberAgents` agents for `Iterations` generations, printing the best cost and parameters per generation, and writes `Filename` with one line per parameter, for example `Radiator_c0_r1_Curvature 0.369`, ready to paste into `options/RadiatorCell.txt`. Parameters with `_IsFixed true` are held at `_value`.
+- `PlotProjections true`: reads `Filename` back and draws the cost as a function of each parameter over `Plot_min`–`Plot_max` to five PDF files.
+- `SinglePoints true`: reads five parameter values from standard input, prints the cost, and asks whether to continue.
+
+All outputs go to the current directory under fixed names, so run each cell in its own directory. The track loop in the cost function uses 8 OpenMP threads (hard-coded in `src/ResolutionUtilities.cpp`); `OMP_THREAD_LIMIT` can lower this. One cost evaluation with 20000 tracks takes about 0.1 s on 8 threads of a 64-core EL9 node, so a fit with the committed settings (50 agents, 700 iterations) takes of the order of an hour per cell. Optimising the full detector means one run per cell and merging the resulting lines into `options/RadiatorCell.txt`; the committed values were obtained with 20000 tracks.
+
+## RunARC: simulation and reconstruction
+
+```bash
+../build/apps/RunARC CherenkovAngleResolution \
+    General ../options/General.txt Particle ../options/Particle.txt \
+    ARCGeometry ../options/ARCGeometry.txt RadiatorCell ../options/RadiatorCell.txt \
+    EventDisplay ../options/EventDisplay.txt
+```
+
+- `CherenkovAngleResolution`: generates `NumberTracks` tracks, traces and reconstructs their photons and writes `CherenkovFile.root` containing `CherenkovTree`, one entry per track: momentum and direction, entrance and mirror-hit points, initial and final cell indices, per-photon true and reconstructed Cherenkov angles (with true and assumed emission point), energies, hit positions, migration flags and status codes, and the per-track single-photon resolution, total resolution and the separation significance between the two mass hypotheses. It also writes an event display PDF of the row selected by `EventDisplay/RowToDraw` with the tracks listed in `General/TrackToDraw`.
+- `SingleTrack`: propagates one track defined by `Particle/Momentum`, `Particle/CosTheta`, `Particle/Phi` and draws its photon hits to `PhotonHits.pdf`. This mode addresses cell (0, 0), which only exists with `General/FullArray false`.
+
+## Known limitations
+
+- With the 8-thread cost function the optimisation is not reproducible: the global ROOT random generator is shared between threads, so repeated evaluations at the same parameters and seed differ (measured: about 1 % at 20000 tracks, with occasional much larger outliers) and identical fits converge to different geometries. Running with `OMP_THREAD_LIMIT=1` makes results exactly reproducible at the price of speed; `OMP_NUM_THREADS` has no effect because the thread count is set in the code.
+- The differential-evolution random engine uses the library default seed and is not controlled by `General/Seed`.
+- `CherenkovTree` uses fixed-size arrays of 2000 photons per track; a track with more photons overflows them and only a warning is printed.
+- `documentation/` contains Doxygen output from an early version of the code and does not cover the current classes; `documentation/Doxyfile` regenerates it.
+
+## Repository layout
+
+- `apps/`: the two executables.
+- `include/`, `src/`: the `ARC_Simulation_Reconstruction` library (geometry, tracking, photon generation and mapping, reconstruction, optimisation interface, event display).
+- `options/`: settings files.
+- `include/DifferentialEvolution.h` (differential evolution, by Milos Stojanovic) and `include/Quartic.h`, `src/Quartic.cpp` (quartic solver, by Saša Milenković, GPL) are third-party code.
