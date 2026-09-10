@@ -44,6 +44,7 @@ int main(int argc, char *argv[]) {
   const std::string RunMode(argv[1]);
   const std::size_t Seed = Settings::GetSizeT("General/Seed");
   gRandom->SetSeed(Seed);
+  Utilities::Random().SetSeed(Seed);
   std::cout << "Generating tracks...\n";
   const int ParticleID = Settings::GetInt("Particle/ID");;
   const TrackingVolume InnerTracker;

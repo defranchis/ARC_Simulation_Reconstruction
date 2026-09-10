@@ -9,6 +9,7 @@
 #include"Settings.h"
 #include"SiPM.h"
 #include"RadiatorArray.h"
+#include"Utilities.h"
 
 namespace PhotonMapper {
 
@@ -116,7 +117,7 @@ namespace PhotonMapper {
     const double Lambda4 = Lambda2*Lambda2;
     const double Exponent = -Clarity*(photon.GetAerogelTravelDistance())/Lambda4;
     const double Transmission = T0*TMath::Exp(Exponent);
-    return gRandom->Uniform(0.0, 1.0) > Transmission;
+    return Utilities::Random().Uniform(0.0, 1.0) > Transmission;
   }
 
 }

@@ -18,6 +18,7 @@
 #include"Photon.h"
 #include"Settings.h"
 #include"RadiatorCell.h"
+#include"Utilities.h"
 
 SiPM::SiPM():
   m_DetectorSizeX(Settings::GetDouble("RadiatorCell/DetectorSize")),
@@ -53,7 +54,7 @@ PhotonHit SiPM::AddPhotonHit(Photon &photon) const {
     photon.UpdatePhotonStatus(Photon::Status::DetectorMiss);
     return photonHit;
   }
-  const double RandomNumber = gRandom->Uniform(0.0, m_MaxPDE);
+  const double RandomNumber = Utilities::Random().Uniform(0.0, m_MaxPDE);
   const double Efficiency = m_Interpolator.Eval(PhotonLambda)*0.90*0.80;
   if(RandomNumber <= Efficiency) {
     photon.UpdatePhotonStatus(Photon::Status::DetectorHit);

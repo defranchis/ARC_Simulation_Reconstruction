@@ -1,5 +1,6 @@
 // Martin Duy Tat 6th September 2022
 
+#include<cstdint>
 #include"TRandom.h"
 #include"TMath.h"
 #include"Utilities.h"
@@ -228,6 +229,24 @@ double GetMomentumMag() {
     const double Angle1 = GetPredictedCherenkovAngle(Momentum, ID1, Radiator);
     const double Angle2 = GetPredictedCherenkovAngle(Momentum, ID2, Radiator);
     return TMath::Abs(Angle1 - Angle2);
+  }
+
+  TRandom3 &Random() {
+    static thread_local TRandom3 Generator;
+    return Generator;
+  }
+
+  ULong_t TrackSeed(std::size_t Seed, std::size_t TrackNumber) {
+    // Mix the two integers (64-bit finaliser of MurmurHash3)
+    std::uint64_t x = (static_cast<std::uint64_t>(Seed) << 32) ^ TrackNumber;
+    x ^= x >> 33;
+    x *= 0xff51afd7ed558ccdULL;
+    x ^= x >> 33;
+    x *= 0xc4ceb9fe1a85ec53ULL;
+    x ^= x >> 33;
+    // TRandom3 interprets seed 0 as "seed from the clock"
+    const std::uint32_t Mixed = static_cast<std::uint32_t>(x);
+    return Mixed == 0 ? 1 : Mixed;
   }
 
 }

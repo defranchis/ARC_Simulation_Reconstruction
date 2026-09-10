@@ -1,6 +1,8 @@
 // Martin Duy Tat 28th July 2022
 
 #include<omp.h>
+#include<algorithm>
+#include<vector>
 #include<fstream>
 #include<iostream>
 #include<sstream>
@@ -26,22 +28,42 @@
 namespace ResolutionUtilities {
   using Utilities::ResolutionStruct;
 
+  namespace {
+    /**
+     * Number of OpenMP threads used in the track loop when Optimisation/NumberThreads is not set
+     */
+    constexpr int DefaultNumberThreads = 8;
+    int GetNumberThreads() {
+      const int NumberThreads = Settings::Exists("Optimisation/NumberThreads")
+	                      ? Settings::GetInt("Optimisation/NumberThreads")
+	                      : DefaultNumberThreads;
+      // num_threads(0) is undefined in OpenMP
+      return std::max(1, NumberThreads);
+    }
+  }
+
   double CalculateResolution(const Tracks &Particles,
 			     const RadiatorCell *radiatorCell,
 			     const RadiatorArray &radiatorArray,
+			     std::size_t Seed,
 			     bool IncludeCentrePenalty) {
-    // Put it all together
+    // Trace the photons of each track in parallel, one result per track
+    std::vector<ResolutionStruct> TrackResults(Particles.size());
+    const int NumberThreads = GetNumberThreads();
+    #pragma omp parallel for num_threads(NumberThreads)
+    for(std::size_t i = 0; i < Particles.size(); i++) {
+      // Each track gets its own photon sequence, independent of the thread schedule
+      Utilities::Random().SetSeed(Utilities::TrackSeed(Seed, i));
+      TrackResults[i] =
+        Utilities::TrackPhotons(Particles[i], *radiatorCell, radiatorArray);
+    }
+    // Put it all together, in track order so that the sums do not depend on the thread schedule
     ResolutionStruct Total{};
     std::size_t PhotonsHitWallTracks = 0;
-    #pragma omp parallel for num_threads(8)
-    for(std::size_t i = 0; i < Particles.size(); i++) {
-      ResolutionStruct resolutionStruct =
-        Utilities::TrackPhotons(Particles[i], *radiatorCell, radiatorArray);
+    for(const auto &resolutionStruct : TrackResults) {
       if(!resolutionStruct.HitCorrectCell) {
         continue;
       }
-      #pragma omp critical (Update)
-      {
       if(resolutionStruct.HitTopWall) {
 	PhotonsHitWallTracks++;
       } else if(resolutionStruct.N <= 1) {
@@ -50,7 +72,6 @@ namespace ResolutionUtilities {
         Total.x += resolutionStruct.x;
         Total.N++;
         Total.CentreHitDistance += resolutionStruct.CentreHitDistance;
-      }
       }
     }
     if(Total.N == 0) {
@@ -95,10 +116,10 @@ namespace ResolutionUtilities {
     if(!radiatorCell.IsDetectorInsideCell()) {
       return 1000.0;
     }
-    gRandom->SetSeed(Seed);
     const double Resolution = CalculateResolution(Particles,
 	                                          &radiatorCell,
 	                                          radiatorArray,
+	                                          Seed,
 	                                          IncludeCentrePenalty);
     return Resolution;
   }
@@ -209,7 +230,11 @@ namespace ResolutionUtilities {
 	     std::size_t Row) {
     ResolutionOptimizable resolutionOptimisable(radiatorCell, radiatorArray, Particles);
     const std::size_t NumberAgents = Settings::GetSizeT("Optimisation/NumberAgents");
-    de::DifferentialEvolution de(resolutionOptimisable, NumberAgents);
+    // Seed of the differential evolution search, separate from the photon seed
+    const std::size_t DESeed = Settings::Exists("Optimisation/Seed")
+	                     ? Settings::GetSizeT("Optimisation/Seed")
+	                     : Settings::GetSizeT("General/Seed");
+    de::DifferentialEvolution de(resolutionOptimisable, NumberAgents, DESeed);
     const int Iterations = Settings::GetInt("Optimisation/Iterations");
     de.Optimize(Iterations, true);
     auto Result = de.GetBestAgent();

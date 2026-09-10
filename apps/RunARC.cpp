@@ -152,6 +152,7 @@ int main(int argc, char *argv[]) {
   const std::string RunMode(argv[1]);
   if(Settings::Exists("General/Seed")) {
     gRandom->SetSeed(Settings::GetSizeT("General/Seed"));
+    Utilities::Random().SetSeed(Settings::GetSizeT("General/Seed"));
   }
   EventDisplay eventDisplay;
   const TrackingVolume InnerTracker;

@@ -8,6 +8,7 @@
 
 #include"Math/Vector3Dfwd.h"
 #include"Math/DisplacementVector3D.h"
+#include"TRandom3.h"
 #include"RadiatorCell.h"
 #include"RadiatorArray.h"
 #include"ParticleTrack.h"
@@ -62,6 +63,16 @@ namespace Utilities {
      */
     Vector CentreHitDistance{0.0, 0.0, 0.0};
   };
+  /**
+   * Thread-local random number generator used for photon generation and detection
+   * Each thread owns one generator so that tracks can be processed in parallel
+   */
+  TRandom3 &Random();
+  /**
+   * Seed of the photon generator for one track, mixed from the run seed and the track number
+   * so that each track gets an independent sequence that does not depend on the thread it runs on
+   */
+  ULong_t TrackSeed(std::size_t Seed, std::size_t TrackNumber);
   /**
    * Track photons through radiator cells and return the information about resolutions
    */

@@ -23,6 +23,7 @@ namespace ResolutionUtilities {
   double CalculateResolution(const Tracks &Particles,
 			     const RadiatorCell *radiatorCell,
 			     const RadiatorArray &radiatorArray,
+			     std::size_t Seed,
 			     bool IncludeCentrePenalty);
   /**
    * The "cost" function for minimisation

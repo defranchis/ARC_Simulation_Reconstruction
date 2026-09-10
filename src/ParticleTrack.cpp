@@ -248,19 +248,19 @@ Photon ParticleTrack::GeneratePhoton(double Entry_s,
 				     Photon::Radiator Radiator) const {
   // Random emission point
   const double RandomFraction = m_RandomEmissionPoint
-                              ? gRandom->Uniform(0.005, 0.995) : 0.5;
+                              ? Utilities::Random().Uniform(0.005, 0.995) : 0.5;
   const double EmissionPoint_s = Entry_s + (Exit_s - Entry_s)*RandomFraction;
   const auto EmissionPoint = m_Helix.GetPosition(EmissionPoint_s);
   // Assumed emission point
   const double AssumedEmissionPoint_s = 0.5*(Entry_s + Exit_s);
   const auto AssumedEmissionPoint = m_Helix.GetPosition(AssumedEmissionPoint_s);
   // Energy and index of refraction
-  const double Energy = gRandom->Uniform(1.55, 4.31);
+  const double Energy = Utilities::Random().Uniform(1.55, 4.31);
   const double n_phase = Utilities::GetIndexRefraction(Radiator,
 						       m_ChromaticDispersion,
 						       Energy);
   // Random azimuthal angle
-  const double phi = gRandom->Uniform(0.0, 2*TMath::Pi());
+  const double phi = Utilities::Random().Uniform(0.0, 2*TMath::Pi());
   // Cherenkov angle
   auto GetCosTheta = [&] () {
     double CosTheta = 1.0/(Beta()*n_phase);

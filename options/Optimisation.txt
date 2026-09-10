@@ -1,4 +1,6 @@
 NumberAgents 50
+NumberThreads 8
+Seed 42 # Seed of the differential evolution search
 #Iterations 2000
 #Iterations 200
 Iterations 700

@@ -36,7 +36,7 @@ Both programs take settings as pairs `<Name> <file>` on the command line. `<Name
 | `Particle` | `ID` (PDG code, 211), `ConstantMomentum` (true) with `Momentum` (100), otherwise log-uniform between `Momentum_min` and `Momentum_max`; `RandomPhi` (true) or uniform in `Phi_min`–`Phi_max`; barrel tracks are generated uniformly in `z_min`–`z_max` on the cylinder; `CosTheta` and `Phi` are used only by `RunARC SingleTrack` |
 | `ARCGeometry` | `Radius` (1.91), `Length` (4.362), `CellsPerRow` (9), `FieldStrength` (0.0, tesla), `BarrelZ` (2.01), `EndCapInnerRadius` (0.30), `EndCapOuterRadius` (1.89), `CosTheta_boundary` (0.74) |
 | `RadiatorCell` | `RadiatorThickness` (0.20), `VesselThickness` (0.01), `CoolingThickness` (0.005), `AerogelThickness` (0.01), `MirrorCurvature` (0.37), `DetectorSize` (0.08), then one optimised 5-tuple per cell, `Radiator_c<col>_r<row>_{Curvature,XPosition,ZPosition,DetPosition,DetTilt}` for the barrel and `EndCapRadiator_...` for the end cap |
-| `Optimisation` | `NumberAgents` (50), `Iterations` (700), `DoFit`, `PlotProjections`, `SinglePoints`, `Filename` (FitResults.txt); per parameter `<P>_IsFixed`, `<P>_value`, `<P>_min`, `<P>_max` and `<P>Plot_min`/`<P>Plot_max` for the five parameters `MirrorCurvature`, `MirrorXPosition`, `MirrorZPosition`, `DetectorPosition`, `DetectorTilt` |
+| `Optimisation` | `NumberAgents` (50), `Iterations` (700), `NumberThreads` (8, OpenMP threads in the track loop; defaults to 8 if absent), `Seed` (42, seed of the differential-evolution search; defaults to `General/Seed` if absent), `DoFit`, `PlotProjections`, `SinglePoints`, `Filename` (FitResults.txt); per parameter `<P>_IsFixed`, `<P>_value`, `<P>_min`, `<P>_max` and `<P>Plot_min`/`<P>Plot_max` for the five parameters `MirrorCurvature`, `MirrorXPosition`, `MirrorZPosition`, `DetectorPosition`, `DetectorTilt` |
 | `EventDisplay` | `RowToDraw` (1), `CanvasWidth` (1200), `CanvasHeight` (900); required by `RunARC`, not required by `OptimiseARC` |
 
 The keys `ARCGeometry/MaxEndCapRadius`, `Particle/FromOrigin` and `General/DrawMissPhoton` appear in the committed files but are not read by the code. `General/BarrelOrEndcap`, `General/GasOrAerogel`, `Particle/ID` and the momentum settings must be changed together; the commented alternatives in the files show the aerogel/kaon setup.
@@ -57,7 +57,7 @@ The first two arguments are the cell column and row. Valid barrel cells are row 
 - `PlotProjections true`: reads `Filename` back and draws the cost as a function of each parameter over `Plot_min`–`Plot_max` to five PDF files.
 - `SinglePoints true`: reads five parameter values from standard input, prints the cost, and asks whether to continue.
 
-All outputs go to the current directory under fixed names, so run each cell in its own directory. The track loop in the cost function uses 8 OpenMP threads (hard-coded in `src/ResolutionUtilities.cpp`); `OMP_THREAD_LIMIT` can lower this. One cost evaluation with 20000 tracks takes about 0.1 s on 8 threads of a 64-core EL9 node, so a fit with the committed settings (50 agents, 700 iterations) takes of the order of an hour per cell. Optimising the full detector means one run per cell and merging the resulting lines into `options/RadiatorCell.txt`; the committed values were obtained with 20000 tracks.
+All outputs go to the current directory under fixed names, so run each cell in its own directory. The track loop in the cost function runs on `Optimisation/NumberThreads` OpenMP threads; results do not depend on the thread count. One cost evaluation with 20000 tracks takes about 0.12 s on one thread of a 64-core EL9 node, 0.05 s on 4 threads, and about 0.10 s again on 8 or 16 threads (the loop scales poorly beyond 4 threads), so a fit with the committed settings (50 agents, 700 iterations) takes between half an hour and an hour per cell. Two knobs control randomness: `General/Seed` fixes the tracks and photons, `Optimisation/Seed` fixes the search path; runs with identical settings and seeds are bit-identical. Optimising the full detector means one run per cell and merging the resulting lines into `options/RadiatorCell.txt`; the committed values were obtained with 20000 tracks.
 
 ## RunARC: simulation and reconstruction
 
@@ -73,8 +73,7 @@ All outputs go to the current directory under fixed names, so run each cell in i
 
 ## Known limitations
 
-- With the 8-thread cost function the optimisation is not reproducible: the global ROOT random generator is shared between threads, so repeated evaluations at the same parameters and seed differ (measured: about 1 % at 20000 tracks, with occasional much larger outliers) and identical fits converge to different geometries. Running with `OMP_THREAD_LIMIT=1` makes results exactly reproducible at the price of speed; `OMP_NUM_THREADS` has no effect because the thread count is set in the code.
-- The differential-evolution random engine uses the library default seed and is not controlled by `General/Seed`.
+- The multithreaded track loop in the cost function scales poorly: 4 threads give the shortest evaluation time, 8 or more are slower than 4.
 - `CherenkovTree` uses fixed-size arrays of 2000 photons per track; a track with more photons overflows them and only a warning is printed.
 - `documentation/` contains Doxygen output from an early version of the code and does not cover the current classes; `documentation/Doxyfile` regenerates it.
 
