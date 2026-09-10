@@ -1,0 +1,7 @@
+<map id="RadiatorArray" name="RadiatorArray">
+<area shape="rect" id="Node000001" title=" " alt="" coords="114,5,226,33"/>
+<area shape="rect" id="Node000002" href="$classBarrelRadiatorArray.html" title=" " alt="" coords="5,81,156,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="144,45,98,83,95,78,141,41"/>
+<area shape="rect" id="Node000003" href="$classEndCapRadiatorArray.html" title=" " alt="" coords="180,81,341,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="199,40,246,78,243,83,195,44"/>
+</map>

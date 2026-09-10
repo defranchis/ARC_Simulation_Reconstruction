@@ -1,0 +1,20 @@
+<map id="include/BarrelRadiatorCell.h" name="include/BarrelRadiatorCell.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="619,5,822,33"/>
+<area shape="rect" id="Node000002" href="$HalfRadiatorCell_8h.html" title=" " alt="" coords="230,81,422,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="636,39,398,83,397,78,635,34"/>
+<area shape="rect" id="Node000004" href="$BarrelRadiatorArray_8cpp.html" title=" " alt="" coords="400,157,599,184"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="624,39,552,58,524,70,507,83,498,100,495,120,499,156,493,156,490,120,493,98,503,79,521,65,550,53,623,34"/>
+<area shape="rect" id="Node000006" href="$BarrelRadiatorCell_8cpp.html" title=" " alt="" coords="516,81,707,109"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="690,44,632,83,629,78,687,39"/>
+<area shape="rect" id="Node000007" href="$EndCapRadiatorCell_8cpp.html" title=" " alt="" coords="731,81,932,109"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="754,39,813,78,810,83,751,44"/>
+<area shape="rect" id="Node000008" href="$Photon_8cpp.html" title=" " alt="" coords="956,81,1072,109"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="788,35,962,78,961,83,787,40"/>
+<area shape="rect" id="Node000009" href="$Utilities_8cpp.html" title=" " alt="" coords="1097,81,1219,109"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="815,33,1085,78,1097,80,1096,86,1084,84,814,39"/>
+<area shape="rect" id="Node000003" href="$OptimiseARC_8cpp.html" title=" " alt="" coords="5,157,175,184"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="271,116,133,159,131,154,269,111"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="371,112,470,154,468,159,369,117"/>
+<area shape="rect" id="Node000005" href="$HalfRadiatorCell_8cpp.html" title=" " alt="" coords="198,157,377,184"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="315,123,297,157,292,155,310,121"/>
+</map>

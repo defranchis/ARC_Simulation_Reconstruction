@@ -1,20 +1,16 @@
 var searchData=
 [
-  ['gas_6',['Gas',['../structPhoton.html#a57e9205218efa5311a4b84b22b1919c0a635459702f9817de29e608fa3395637c',1,'Photon']]],
-  ['generatephoton_7',['GeneratePhoton',['../classParticleTrack.html#a5e545dc04c491d412fa9a08cd44ccc30',1,'ParticleTrack']]],
-  ['generatephotonfromaerogel_8',['GeneratePhotonFromAerogel',['../classParticleTrack.html#aaee5d5771935cf3f2579562df89274c5',1,'ParticleTrack']]],
-  ['generatephotonfromgas_9',['GeneratePhotonFromGas',['../classParticleTrack.html#a8ad2426f9af5a5de7df7a76ec10779ec',1,'ParticleTrack']]],
-  ['generatephotonsfromaerogel_10',['GeneratePhotonsFromAerogel',['../classParticleTrack.html#a3a12e716eb5b8427f3b8f9db4c20bc6f',1,'ParticleTrack']]],
-  ['generatephotonsfromgas_11',['GeneratePhotonsFromGas',['../classParticleTrack.html#a69fb378aa93a96e4d67cd4fdc6d3fd55',1,'ParticleTrack']]],
-  ['getaerogelthickness_12',['GetAerogelThickness',['../classRadiatorCell.html#af970de29ec343b71c3506a7fd10e2328',1,'RadiatorCell']]],
-  ['getcoolingthickness_13',['GetCoolingThickness',['../classRadiatorCell.html#ac521c4891d2d14a586f4087ae708a5df',1,'RadiatorCell']]],
-  ['getfieldstrength_14',['GetFieldStrength',['../classTrackingVolume.html#a5f4aa7a45429780422221b4ccf64da55',1,'TrackingVolume']]],
-  ['getmass_15',['GetMass',['../namespaceParticleMass.html#a7e5249be1f7612618794dfaff216b8d1',1,'ParticleMass']]],
-  ['getmirrorcentre_16',['GetMirrorCentre',['../classRadiatorCell.html#ad6f3814cfcf554390c7715a659cf9516',1,'RadiatorCell']]],
-  ['getmirrorcurvature_17',['GetMirrorCurvature',['../classRadiatorCell.html#a27c298bdc22f41231b11cd434d66bd1e',1,'RadiatorCell']]],
-  ['getradiatorposition_18',['GetRadiatorPosition',['../classRadiatorCell.html#a75c9abe651d9c8ef556b41a21a7ba4ae',1,'RadiatorCell']]],
-  ['getradiatorthickness_19',['GetRadiatorThickness',['../classRadiatorCell.html#a8a9a7e46d1afaf70f846e9f888cafd61',1,'RadiatorCell']]],
-  ['getradius_20',['GetRadius',['../classTrackingVolume.html#a984aff64888cd1a81f4dddedabd04ae6',1,'TrackingVolume']]],
-  ['getvesselthickness_21',['GetVesselThickness',['../classRadiatorCell.html#a5b69e00beb3f61f8a5d0211b551e7fef',1,'RadiatorCell']]],
-  ['globaldetector_22',['GlobalDetector',['../classParticleTrack.html#a980296a6298c37aa0bb7476dda166d17a7051b329989f543f42be257f0da1c9e0',1,'ParticleTrack']]]
+  ['de_0',['de',['../namespacede.html',1,'']]],
+  ['detectorhit_1',['DetectorHit',['../classPhoton.html#a0df9b727fe848572dd2d662415ae1e8da168061887e2c7130e166f4f2c8dd0e78',1,'Photon']]],
+  ['detectormiss_2',['DetectorMiss',['../classPhoton.html#a0df9b727fe848572dd2d662415ae1e8daf8c5958d10e5fe779c520ee845fe7b7b',1,'Photon']]],
+  ['differentialevolution_3',['DifferentialEvolution',['../classde_1_1DifferentialEvolution.html',1,'de::DifferentialEvolution'],['../classde_1_1DifferentialEvolution.html#ab96b5709eaf7a2fde0dbab9a962c2d5c',1,'de::DifferentialEvolution::DifferentialEvolution()']]],
+  ['differentialevolution_2eh_4',['DifferentialEvolution.h',['../DifferentialEvolution_8h.html',1,'']]],
+  ['dofit_5',['DoFit',['../namespaceResolutionUtilities.html#a6f90f165a510d7bf0242a8f2bfbdd391',1,'ResolutionUtilities']]],
+  ['drawarcgeometry_6',['DrawARCGeometry',['../classTrackingVolume.html#a64820271faaf7cbafa9b9e2da1f1a474',1,'TrackingVolume']]],
+  ['draweventdisplay_7',['DrawEventDisplay',['../classEventDisplay.html#aa314b4d87a8583cc6374ce2f041c9b44',1,'EventDisplay']]],
+  ['drawparticletrack_8',['DrawParticleTrack',['../classParticleTrack.html#af58b3ca921f5771ff6a7ecef6dfc17c2',1,'ParticleTrack']]],
+  ['drawphotonpath_9',['DrawPhotonPath',['../classPhoton.html#a9c017093175bdb59ed56e418164dd4ac',1,'Photon']]],
+  ['drawradiatorarray_10',['DrawRadiatorArray',['../classBarrelRadiatorArray.html#a48aca66a3e5a2b92ba4198ee55dc95b6',1,'BarrelRadiatorArray::DrawRadiatorArray()'],['../classEndCapRadiatorArray.html#a7274e7636bdfe27d053d13479ff0bbed',1,'EndCapRadiatorArray::DrawRadiatorArray()'],['../classRadiatorArray.html#a169dee4d8ff5d7f78bc46d77763b015c',1,'RadiatorArray::DrawRadiatorArray()']]],
+  ['drawradiatorgeometry_11',['DrawRadiatorGeometry',['../classBarrelRadiatorCell.html#a7cc1b078db703cd49dda6099e379d9a6',1,'BarrelRadiatorCell::DrawRadiatorGeometry()'],['../classEndCapRadiatorCell.html#a554d2f621bbe021a5a77878f78fdda86',1,'EndCapRadiatorCell::DrawRadiatorGeometry()'],['../classHalfRadiatorCell.html#af70ad7db67d98cd89e3029bb7915c0af',1,'HalfRadiatorCell::DrawRadiatorGeometry()'],['../classRadiatorCell.html#a163975b3b6baf94df0e3413c09f1647b',1,'RadiatorCell::DrawRadiatorGeometry()']]],
+  ['drawsipm_12',['DrawSiPM',['../classSiPM.html#a5d9996e19295ad5cf2c58e59b0efc19c',1,'SiPM']]]
 ];

@@ -80,5 +80,5 @@ All outputs go to the current directory under fixed names, so run each cell in i
 - `apps/`: the two executables.
 - `include/`, `src/`: the `ARC_Simulation_Reconstruction` library (geometry, tracking, photon generation and mapping, reconstruction, optimisation interface, event display).
 - `options/`: settings files.
-- `documentation/`: Doxygen output (HTML and LaTeX) for the current sources; regenerate with `doxygen documentation/Doxyfile` from the repository root.
+- `documentation/`: Doxygen output for the current sources, `html/index.html` and the PDF manual `latex/refman.pdf`. Regenerate from the repository root with `doxygen documentation/Doxyfile` (needs Doxygen and Graphviz), then `make` in `documentation/latex` for the PDF; the LaTeX style bundled with Doxygen 1.13 needs TeX Live 2022 or older. The vendored quartic solver is excluded from the documentation.
 - `include/DifferentialEvolution.h` (differential evolution, by Milos Stojanovic) and `include/Quartic.h`, `src/Quartic.cpp` (quartic solver, by Saša Milenković, GPL) are third-party code.

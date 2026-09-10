@@ -1,0 +1,12 @@
+<map id="ParticleTrack" name="ParticleTrack">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,268,109,295"/>
+<area shape="rect" id="Node000002" href="$classParticle.html" title=" " alt="" coords="22,191,92,218"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,233,60,267,54,267,54,233"/>
+<area shape="rect" id="Node000003" href="$classARCVector.html" title=" " alt="" coords="14,5,103,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="56,48,50,98,52,149,57,190,52,191,46,149,45,98,51,48"/>
+<area shape="rect" id="Node000004" href="$classRadiatorCell.html" title=" " alt="" coords="136,98,237,126"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="71,45,90,72,112,86,136,97,134,101,109,91,86,76,66,48"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="157,137,77,192,74,188,154,132"/>
+<area shape="rect" id="Node000005" href="$classSiPM.html" title=" " alt="" coords="190,5,244,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="210,48,193,98,188,97,205,46"/>
+</map>

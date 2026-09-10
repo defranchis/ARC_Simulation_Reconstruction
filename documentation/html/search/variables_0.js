@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['m_5fdetector_123',['m_Detector',['../classRadiatorCell.html#aa92c253e42428b4893f6a4768de918c2',1,'RadiatorCell']]],
-  ['m_5fdirection_124',['m_Direction',['../structPhoton.html#a1793a4c8f8a6961f762a0e524c1324db',1,'Photon']]],
-  ['m_5femissionpoint_125',['m_EmissionPoint',['../structPhoton.html#ac29e03ffb4ecdd3612c18fa979223d17',1,'Photon']]],
-  ['m_5fenergy_126',['m_Energy',['../structPhoton.html#a8e29ccdcd393f9a33784875f3050ea35',1,'Photon']]],
-  ['m_5fphoton_127',['m_Photon',['../structPhotonHit.html#a7177a9564df89e43be47842dfa11e979',1,'PhotonHit']]],
-  ['m_5fposition_128',['m_Position',['../structPhoton.html#a7d938a280def2454b14b5f00d49f191e',1,'Photon']]],
-  ['m_5fradiator_129',['m_Radiator',['../structPhoton.html#a05035a4c6d1d5290e460213e027f0b1e',1,'Photon']]]
+  ['centrehitdistance_0',['CentreHitDistance',['../structUtilities_1_1ResolutionStruct.html#a24b7f805498828e7ea359186a2330be3',1,'Utilities::ResolutionStruct::CentreHitDistance'],['../structResolutionUtilities_1_1ResolutionStruct.html#a24b7f805498828e7ea359186a2330be3',1,'ResolutionUtilities::ResolutionStruct::CentreHitDistance']]],
+  ['cherenkovangle_5freco_1',['CherenkovAngle_Reco',['../structCherenkovFile.html#a3694e1da9006147e4644cc015a471732',1,'CherenkovFile']]],
+  ['cherenkovangle_5freco_5ftrueemissionpoint_2',['CherenkovAngle_Reco_TrueEmissionPoint',['../structCherenkovFile.html#a755c32a189257b3f3ae0af4092cf43d9',1,'CherenkovFile']]],
+  ['cherenkovangle_5ftrue_3',['CherenkovAngle_True',['../structCherenkovFile.html#a43c6183c057ee2c80dfc3da42efedf06',1,'CherenkovFile']]],
+  ['cherenkovtree_4',['CherenkovTree',['../structCherenkovFile.html#a15fbad941c0bf6930ea56b8fc7d1a53e',1,'CherenkovFile']]],
+  ['costheta_5',['CosTheta',['../structCherenkovFile.html#a06e109d8ec22099cd40106db0528f642',1,'CherenkovFile']]]
 ];

@@ -1,0 +1,43 @@
+<map id="include/Settings.h" name="include/Settings.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="1863,5,2000,33"/>
+<area shape="rect" id="Node000002" href="$OptimiseARC_8cpp.html" title=" " alt="" coords="5,81,175,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1848,23,1572,26,1162,34,679,52,430,66,186,84,176,85,175,79,186,78,430,61,679,47,1162,29,1572,20,1848,18"/>
+<area shape="rect" id="Node000003" href="$RunARC_8cpp.html" title=" " alt="" coords="198,81,334,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1848,23,1594,25,1223,33,789,51,565,65,346,84,334,85,334,80,346,78,565,60,789,45,1223,27,1594,19,1848,18"/>
+<area shape="rect" id="Node000004" href="$BarrelRadiatorArray_8cpp.html" title=" " alt="" coords="358,81,556,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="1848,25,1310,42,943,59,569,84,556,85,556,79,568,78,943,54,1310,37,1848,20"/>
+<area shape="rect" id="Node000005" href="$BarrelRadiatorCell_8cpp.html" title=" " alt="" coords="580,81,771,109"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="1849,26,1394,44,1091,61,784,84,771,85,770,79,783,78,1091,56,1394,39,1848,20"/>
+<area shape="rect" id="Node000006" href="$EndCapRadiatorArray_8cpp.html" title=" " alt="" coords="795,81,1004,109"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="1848,28,1486,49,1016,84,1004,85,1003,79,1015,78,1486,44,1848,22"/>
+<area shape="rect" id="Node000007" href="$EndCapRadiatorCell_8cpp.html" title=" " alt="" coords="1027,81,1228,109"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="1848,30,1240,84,1228,85,1228,79,1239,78,1847,25"/>
+<area shape="rect" id="Node000008" href="$EventDisplay_8cpp.html" title=" " alt="" coords="1251,81,1406,109"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="1848,32,1418,84,1407,85,1406,80,1418,78,1848,27"/>
+<area shape="rect" id="Node000009" href="$HalfRadiatorCell_8cpp.html" title=" " alt="" coords="1430,81,1609,109"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="1849,38,1594,83,1593,78,1848,33"/>
+<area shape="rect" id="Node000010" href="$Particle_8cpp.html" title=" " alt="" coords="1633,81,1752,109"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="1876,40,1736,83,1735,78,1874,35"/>
+<area shape="rect" id="Node000011" href="$ParticleTrack_8cpp.html" title=" " alt="" coords="1776,81,1929,109"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="1908,45,1868,83,1865,79,1905,42"/>
+<area shape="rect" id="Node000012" href="$Photon_8cpp.html" title=" " alt="" coords="1953,81,2070,109"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="1958,41,1999,79,1995,83,1954,45"/>
+<area shape="rect" id="Node000013" href="$PhotonMapper_8cpp.html" title=" " alt="" coords="2093,81,2258,109"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="1989,35,2132,78,2131,83,1988,40"/>
+<area shape="rect" id="Node000014" href="$RadiatorArray_8cpp.html" title=" " alt="" coords="2281,81,2440,109"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="2015,32,2284,78,2283,83,2014,37"/>
+<area shape="rect" id="Node000015" href="$RadiatorCell_8cpp.html" title=" " alt="" coords="2465,81,2616,109"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="2015,27,2453,78,2465,80,2464,85,2452,84,2014,32"/>
+<area shape="rect" id="Node000016" href="$ResolutionOptimizable_8cpp.html" title=" " alt="" coords="2640,81,2860,109"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="2015,25,2629,78,2640,79,2640,85,2628,84,2015,30"/>
+<area shape="rect" id="Node000017" href="$ResolutionUtilities_8cpp.html" title=" " alt="" coords="2884,81,3075,109"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="2015,22,2386,42,2872,78,2884,79,2883,85,2871,84,2386,48,2015,27"/>
+<area shape="rect" id="Node000018" href="$Settings_8cpp.html" title=" " alt="" coords="3099,81,3223,109"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="2015,19,2207,23,2473,33,2778,51,3088,78,3098,80,3098,85,3087,84,2778,56,2473,38,2207,29,2015,24"/>
+<area shape="rect" id="Node000019" href="$SiPM_8cpp.html" title=" " alt="" coords="3246,81,3350,109"/>
+<area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="2015,17,2229,19,2531,27,2881,45,3060,60,3236,78,3246,80,3245,85,3235,84,3060,65,2880,50,2531,32,2229,24,2015,23"/>
+<area shape="rect" id="Node000020" href="$TrackingVolume_8cpp.html" title=" " alt="" coords="3374,81,3548,109"/>
+<area shape="poly" id="edge19_Node000001_Node000020" title=" " alt="" coords="2015,19,2580,34,2967,51,3362,78,3373,79,3373,85,3362,84,2967,57,2580,39,2015,24"/>
+<area shape="rect" id="Node000021" href="$Utilities_8cpp.html" title=" " alt="" coords="3572,81,3694,109"/>
+<area shape="poly" id="edge20_Node000001_Node000021" title=" " alt="" coords="2015,17,2275,17,2657,24,3104,43,3334,58,3560,78,3571,80,3571,85,3559,84,3334,63,3103,48,2657,30,2275,23,2015,22"/>
+</map>

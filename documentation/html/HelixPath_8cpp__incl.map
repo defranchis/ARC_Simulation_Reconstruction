@@ -1,0 +1,22 @@
+<map id="src/HelixPath.cpp" name="src/HelixPath.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="328,5,461,33"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,81,80,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="328,35,95,83,94,78,327,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="104,81,221,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="354,36,218,79,217,74,352,31"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="245,81,384,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="382,36,341,73,337,69,378,32"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="409,81,543,109"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="411,32,453,69,449,73,407,36"/>
+<area shape="rect" id="Node000006" href="$HelixPath_8h.html" title=" " alt="" coords="622,81,717,109"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="444,31,608,74,606,80,443,36"/>
+<area shape="rect" id="Node000009" href="$HelixFunctor_8h.html" title=" " alt="" coords="520,157,634,184"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="462,28,512,47,536,61,557,79,573,109,579,141,574,142,568,111,552,83,533,65,510,52,461,34"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="469,232,621,260"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="672,109,666,146,659,167,649,186,624,210,595,228,592,223,621,206,644,183,655,164,661,144,666,108"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="645,232,864,260"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="679,108,742,218,737,220,674,110"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="654,111,606,149,603,145,651,107"/>
+<area shape="poly" id="edge9_Node000009_Node000007" title=" " alt="" coords="574,186,559,220,554,217,569,184"/>
+<area shape="poly" id="edge10_Node000009_Node000008" title=" " alt="" coords="610,182,711,224,709,229,608,187"/>
+</map>

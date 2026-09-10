@@ -1,0 +1,7 @@
+<map id="BarrelRadiatorCell" name="BarrelRadiatorCell">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,81,146,109"/>
+<area shape="rect" id="Node000003" href="$classHalfRadiatorCell.html" title=" " alt="" coords="11,157,140,184"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="78,124,78,156,73,156,73,124"/>
+<area shape="rect" id="Node000002" href="$classRadiatorCell.html" title=" " alt="" coords="25,5,126,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,48,78,81,73,81,73,48"/>
+</map>

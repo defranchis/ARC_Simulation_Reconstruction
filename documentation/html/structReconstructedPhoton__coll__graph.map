@@ -1,0 +1,14 @@
+<map id="ReconstructedPhoton" name="ReconstructedPhoton">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,360,165,388"/>
+<area shape="rect" id="Node000002" href="$classPhoton.html" title=" " alt="" coords="52,268,118,295"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,310,88,360,82,360,82,310"/>
+<area shape="rect" id="Node000003" href="$classParticle.html" title=" " alt="" coords="50,191,120,218"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="88,233,88,267,82,267,82,233"/>
+<area shape="rect" id="Node000004" href="$classARCVector.html" title=" " alt="" coords="42,5,131,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="84,48,78,98,80,149,85,190,80,191,74,149,73,98,79,48"/>
+<area shape="rect" id="Node000005" href="$classRadiatorCell.html" title=" " alt="" coords="164,98,265,126"/>
+<area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="99,45,118,72,140,86,164,97,162,101,137,91,114,76,94,48"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="185,137,105,192,102,188,182,132"/>
+<area shape="rect" id="Node000006" href="$classSiPM.html" title=" " alt="" coords="218,5,272,33"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="238,48,221,98,216,97,233,46"/>
+</map>

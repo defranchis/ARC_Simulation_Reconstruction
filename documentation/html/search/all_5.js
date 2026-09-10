@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['m_5fdetector_24',['m_Detector',['../classRadiatorCell.html#aa92c253e42428b4893f6a4768de918c2',1,'RadiatorCell']]],
-  ['m_5fdirection_25',['m_Direction',['../structPhoton.html#a1793a4c8f8a6961f762a0e524c1324db',1,'Photon']]],
-  ['m_5femissionpoint_26',['m_EmissionPoint',['../structPhoton.html#ac29e03ffb4ecdd3612c18fa979223d17',1,'Photon']]],
-  ['m_5fenergy_27',['m_Energy',['../structPhoton.html#a8e29ccdcd393f9a33784875f3050ea35',1,'Photon']]],
-  ['m_5fphoton_28',['m_Photon',['../structPhotonHit.html#a7177a9564df89e43be47842dfa11e979',1,'PhotonHit']]],
-  ['m_5fposition_29',['m_Position',['../structPhoton.html#a7d938a280def2454b14b5f00d49f191e',1,'Photon']]],
-  ['m_5fradiator_30',['m_Radiator',['../structPhoton.html#a05035a4c6d1d5290e460213e027f0b1e',1,'Photon']]],
-  ['main_31',['main',['../RunARC_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'RunARC.cpp']]]
+  ['failedreconstruction_0',['FailedReconstruction',['../namespacePhotonReconstructor.html#a97dfa93da2729cd1a994aff272044a2f',1,'PhotonReconstructor']]],
+  ['fcn_1',['fcn',['../namespaceResolutionUtilities.html#abb698ae8159e318dbc72cb2ba348667d',1,'ResolutionUtilities']]],
+  ['file_2',['File',['../structCherenkovFile.html#a5f8c440735bb2ae233f7165054c0e3e9',1,'CherenkovFile']]],
+  ['fill_3',['Fill',['../structCherenkovFile.html#a88233cae3e25b4e7216e2dcc59e02229',1,'CherenkovFile']]],
+  ['finalradiatorcolumnnumber_4',['FinalRadiatorColumnNumber',['../structCherenkovFile.html#ab3534496db16e0272e70a55e243bd1a3',1,'CherenkovFile']]],
+  ['finalradiatorrownumber_5',['FinalRadiatorRowNumber',['../structCherenkovFile.html#a55378a7b72c7db3ed3e6a447e3e132e5',1,'CherenkovFile']]],
+  ['findradiator_6',['FindRadiator',['../classBarrelRadiatorArray.html#a727959598fa417bd567a6b99de100470',1,'BarrelRadiatorArray::FindRadiator()'],['../classEndCapRadiatorArray.html#a5e1221a6f60d85bd2d3d720b08730322',1,'EndCapRadiatorArray::FindRadiator()'],['../classParticle.html#a09e73b4d6e8308f037a700b13a8d0861',1,'Particle::FindRadiator()'],['../classRadiatorArray.html#af6e30714d7b605d636469f12be558a34',1,'RadiatorArray::FindRadiator()']]],
+  ['functor1d_7',['Functor1D',['../HelixPath_8cpp.html#a661584e7e79afdca7031001dedeef600',1,'HelixPath.cpp']]]
 ];

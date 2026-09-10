@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['radiatorcell_70',['RadiatorCell',['../classRadiatorCell.html',1,'']]]
+  ['barrelhelixfunctor_0',['BarrelHelixFunctor',['../classBarrelHelixFunctor.html',1,'']]],
+  ['barrelradiatorarray_1',['BarrelRadiatorArray',['../classBarrelRadiatorArray.html',1,'']]],
+  ['barrelradiatorcell_2',['BarrelRadiatorCell',['../classBarrelRadiatorCell.html',1,'']]]
 ];

@@ -1,0 +1,11 @@
+<map id="include/HelixPath.h" name="include/HelixPath.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="118,5,264,33"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,157,158,184"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="173,36,148,56,124,83,106,113,93,144,88,141,101,111,119,79,144,52,170,32"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="181,157,401,184"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="212,31,238,52,262,80,278,111,288,142,283,143,273,113,258,82,234,56,209,35"/>
+<area shape="rect" id="Node000004" href="$HelixFunctor_8h.html" title=" " alt="" coords="134,81,248,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="194,34,194,66,188,66,188,34"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="173,111,115,150,112,146,170,107"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="210,107,263,146,260,150,207,111"/>
+</map>
