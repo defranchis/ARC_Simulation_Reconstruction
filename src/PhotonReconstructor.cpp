@@ -33,14 +33,14 @@ namespace PhotonReconstructor {
     const double InsideSqrt = DetectionPoint.Mag2()/(Curvature*Curvature)
                             - TMath::Power(DetectionMirrorParaDist, 2);
     if(InsideSqrt < 0.0) {
-      return -2.0;
+      return FailedReconstruction;
     }
     const double DetectionMirrorPerpDist = TMath::Sqrt(InsideSqrt);
     auto quarticSolution = SolveQuartic(EmissionMirrorDist,
 					DetectionMirrorParaDist,
 					DetectionMirrorPerpDist);
     if(quarticSolution.m_DegenerateSolution) {
-      return -2.0;
+      return FailedReconstruction;
     }
     Vector ReflectionPoint = GetReflectionPoint(EmissionPoint,
 						DetectionPoint,
@@ -93,17 +93,20 @@ namespace PhotonReconstructor {
     std::size_t i = 0;
     for(const auto &polySolution : polySolutions) {
       if(polySolution.imag() == 0.0) {
-	double RealPart = polySolution.real();
-	quarticSolution.m_SinBeta[i] = RealPart;
-	quarticSolution.m_CosBeta[i] = (EmMirrorDist + DetMirrorParaDist)*RealPart;
-	quarticSolution.m_CosBeta[i] += EmMirrorDist*DetMirrorPerpDist
-	                                *(1.0 - 2.0*RealPart*RealPart);
-	quarticSolution.m_CosBeta[i] /= DetMirrorPerpDist
-	                              + 2.0*EmMirrorDist*DetMirrorParaDist*RealPart;
+	// Only two real solutions can be stored; any other count is degenerate
+	if(i < quarticSolution.m_SinBeta.size()) {
+	  double RealPart = polySolution.real();
+	  quarticSolution.m_SinBeta[i] = RealPart;
+	  quarticSolution.m_CosBeta[i] = (EmMirrorDist + DetMirrorParaDist)*RealPart;
+	  quarticSolution.m_CosBeta[i] += EmMirrorDist*DetMirrorPerpDist
+	                                  *(1.0 - 2.0*RealPart*RealPart);
+	  quarticSolution.m_CosBeta[i] /= DetMirrorPerpDist
+	                                + 2.0*EmMirrorDist*DetMirrorParaDist*RealPart;
+	}
 	i++;
       }
     }
-    if(i > 2) {
+    if(i != quarticSolution.m_SinBeta.size()) {
       quarticSolution.m_DegenerateSolution = true;
     }
     return quarticSolution;

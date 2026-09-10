@@ -29,16 +29,26 @@ namespace PhotonReconstructor {
    */
   ReconstructedPhoton ReconstructPhoton(const PhotonHit &photonHit);
   /**
+   * Cosine value returned when the reconstruction fails
+   */
+  constexpr double FailedReconstruction = -2.0;
+  /**
+   * Check if a reconstructed cosine is a valid result rather than the failure sentinel
+   */
+  inline bool IsReconstructed(double CosAngle) {
+    return CosAngle >= -1.0 && CosAngle <= 1.0;
+  }
+  /**
    * Struct with solutions to the quartic equation
    */
   struct QuarticSolution {
     /**
      * Sine and cosine of angle between emission and reflection point, relative to the mirror centre
      */
-    std::array<double, 2> m_SinBeta;
-    std::array<double, 2> m_CosBeta;
+    std::array<double, 2> m_SinBeta{};
+    std::array<double, 2> m_CosBeta{};
     /**
-     * Flag that is true if there are more than 2 solutions
+     * Flag that is true if the number of real solutions is not 2
      */
     bool m_DegenerateSolution = false;
   };

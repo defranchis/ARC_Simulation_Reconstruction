@@ -313,12 +313,17 @@ int main(int argc, char *argv[]) {
 	} else {
 	  auto reconstructedPhoton =
 	    PhotonReconstructor::ReconstructPhoton(*photonHit);
+	  // Failed reconstructions are stored as -1.0, like photons without a mirror hit
+	  auto GetAngle = [] (double CosAngle) {
+	    return PhotonReconstructor::IsReconstructed(CosAngle) ? TMath::ACos(CosAngle) : -1.0;
+	  };
 	  File.CherenkovAngle_Reco_TrueEmissionPoint[File.NumberPhotons] =
-	    TMath::ACos(reconstructedPhoton.m_CosCherenkovAngle_TrueEmissionPoint);
+	    GetAngle(reconstructedPhoton.m_CosCherenkovAngle_TrueEmissionPoint);
 	  File.CherenkovAngle_Reco[File.NumberPhotons] =
-	    TMath::ACos(reconstructedPhoton.m_CosCherenkovAngle);
+	    GetAngle(reconstructedPhoton.m_CosCherenkovAngle);
 	  File.HasMigrated[File.NumberPhotons] = Photon.HasPhotonMigrated() ? 1 : 0;
-	  if(Photon.GetStatus() == Photon::Status::DetectorHit) {
+	  if(Photon.GetStatus() == Photon::Status::DetectorHit &&
+	     File.CherenkovAngle_Reco[File.NumberPhotons] >= 0.0) {
 	    File.NumberGoodPhotons += Photon.GetWeight();
 	    GoodAngles.push_back(File.CherenkovAngle_Reco[File.NumberPhotons]);
 	  }

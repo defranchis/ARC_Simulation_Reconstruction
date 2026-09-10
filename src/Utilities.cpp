@@ -107,8 +107,13 @@ double GetMomentumMag() {
     if(!particleTrack.FindRadiator(radiatorArray)) {
       return ResolutionStruct{};
     }
-    // Track through the cell
-    particleTrack.TrackThroughAerogel();
+    // Track through the cell, ignoring tracks that cannot be tracked (as in apps/RunARC.cpp)
+    if(particleTrack.GetParticleLocation() != ParticleTrack::Location::EntranceWindow) {
+      return ResolutionStruct{};
+    }
+    if(!particleTrack.TrackThroughAerogel()) {
+      return ResolutionStruct{};
+    }
     particleTrack.TrackThroughGasToMirror();
     if(particleTrack.GetParticleLocation() != ParticleTrack::Location::Mirror) {
       particleTrack.TrackToNextCell(radiatorArray);
@@ -148,10 +153,11 @@ double GetMomentumMag() {
 	// If photon is detected, reconstruct Cherenkov angle
 	auto reconstructedPhoton =
 	  PhotonReconstructor::ReconstructPhoton(*photonHit);
-	const double CherenkovAngle = TMath::ACos(reconstructedPhoton.m_CosCherenkovAngle);
-	if(CherenkovAngle < 0.0) {
+	const double CosCherenkovAngle = reconstructedPhoton.m_CosCherenkovAngle;
+	if(!PhotonReconstructor::IsReconstructed(CosCherenkovAngle)) {
 	  continue;
 	}
+	const double CherenkovAngle = TMath::ACos(CosCherenkovAngle);
 	CherenkovAngles.push_back(CherenkovAngle);
 	resolutionStruct.N++;
 	resolutionStruct.CentreHitDistance += photonHit->m_CentreHitDistance;
