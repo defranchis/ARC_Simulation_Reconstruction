@@ -69,13 +69,13 @@ class HelixPath {
    */
   Vector m_n;
   /**
-   * Signed radius of curvature
+   * Signed radius of curvature, flipped by ReflectY
    */
-  const double m_Radius;
+  double m_Radius;
   /**
-   * Magnitude of inverse of radius of curvature
+   * Signed inverse of radius of curvature, flipped by ReflectY
    */
-  const double m_InvRadius;
+  double m_InvRadius;
   /**
    * Flag that is true when there is a non-zero magnetic field
    */

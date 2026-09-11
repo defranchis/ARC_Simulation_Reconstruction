@@ -78,4 +78,7 @@ void HelixPath::ReflectZ() {
 void HelixPath::ReflectY() {
   m_n.SetY(-m_n.Y());
   m_Origin.SetY(-m_Origin.Y());
+  // The mirror image of a helix bends the other way, like the opposite charge
+  m_Radius = -m_Radius;
+  m_InvRadius = -m_InvRadius;
 }
