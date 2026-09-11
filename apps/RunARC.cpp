@@ -239,6 +239,16 @@ int main(int argc, char *argv[]) {
       File.TrackNumber = i;
       File.RadiatorRowNumber = static_cast<std::size_t>(-1);
       File.RadiatorColumnNumber = static_cast<std::size_t>(-1);
+      // Tracks that are filled early never reach the code below, so the
+      // branches are reset to the same sentinels that are used elsewhere
+      File.FinalRadiatorRowNumber = static_cast<std::size_t>(-1);
+      File.FinalRadiatorColumnNumber = static_cast<std::size_t>(-1);
+      File.MirrorHit_x = -1.0;
+      File.MirrorHit_y = -1.0;
+      File.MirrorHit_z = -1.0;
+      File.SinglePhotonResolution = -1.0;
+      File.TotalResolution = -1.0;
+      File.Significance = -1.0;
       auto GetMomentum = [&] () {
 	if(BarrelOrEndcap == "Barrel") {
 	  return Utilities::GenerateRandomBarrelTrack(File.CosTheta, File.Phi);
@@ -293,8 +303,6 @@ int main(int argc, char *argv[]) {
 	const bool HitMirror = particleTrack.TrackToNextCell(*radiatorArray);
 	if(!HitMirror) {
 	  File.ParticleLocation = particleTrack.GetParticleLocation();
-	  File.FinalRadiatorRowNumber = static_cast<std::size_t>(-1);
-	  File.FinalRadiatorColumnNumber = static_cast<std::size_t>(-1);
 	  File.Fill();
 	  continue;
 	}
@@ -325,6 +333,7 @@ int main(int argc, char *argv[]) {
 	  TMath::ACos(Photon.GetCosCherenkovAngle());
 	auto photonHit = PhotonMapper::TracePhoton(Photon, *radiatorArray);
 	eventDisplay.AddObject(Photon.DrawPhotonPath());
+	File.HasMigrated[File.NumberPhotons] = Photon.HasPhotonMigrated() ? 1 : 0;
 	if(!Photon.GetMirrorHitPosition()) {
 	  File.CherenkovAngle_Reco_TrueEmissionPoint[File.NumberPhotons] = -1.0;
 	  File.CherenkovAngle_Reco[File.NumberPhotons] = -1.0;
@@ -339,7 +348,6 @@ int main(int argc, char *argv[]) {
 	    GetAngle(reconstructedPhoton.m_CosCherenkovAngle_TrueEmissionPoint);
 	  File.CherenkovAngle_Reco[File.NumberPhotons] =
 	    GetAngle(reconstructedPhoton.m_CosCherenkovAngle);
-	  File.HasMigrated[File.NumberPhotons] = Photon.HasPhotonMigrated() ? 1 : 0;
 	  if(Photon.GetStatus() == Photon::Status::DetectorHit &&
 	     File.CherenkovAngle_Reco[File.NumberPhotons] >= 0.0) {
 	    File.NumberGoodPhotons += Photon.GetWeight();
