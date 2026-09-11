@@ -197,7 +197,9 @@ Rotation3D BarrelRadiatorCell::GetCellOrientation(double HexagonSize,
 						  std::size_t CellRowNumber) {
   const RotationY Rotation1(-TMath::Pi()/2.0);
   const RotationZ Rotation2(-TMath::Pi());
-  if(CellRowNumber == 1) {
+  // Row 0 is the single cell of a non-full array, which sits at the same
+  // azimuth as the main row, so its frame is not rotated in phi either
+  if(CellRowNumber == 0 || CellRowNumber == 1) {
     return Rotation2*Rotation1;
   } else {
     const double BarrelRadius = Settings::GetDouble("ARCGeometry/Radius")
