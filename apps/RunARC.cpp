@@ -13,6 +13,7 @@
 #include<vector>
 #include<algorithm>
 #include<stdexcept>
+#include<limits>
 #include"TFile.h"
 #include"TTree.h"
 #include"TMath.h"
@@ -242,12 +243,15 @@ int main(int argc, char *argv[]) {
       File.RadiatorRowNumber = static_cast<std::size_t>(-1);
       File.RadiatorColumnNumber = static_cast<std::size_t>(-1);
       // Tracks that are filled early never reach the code below, so the
-      // branches are reset to the same sentinels that are used elsewhere
+      // branches are reset to sentinels: -1 for the resolutions, the largest
+      // std::size_t for the cell indices and, since -1 m is a position a
+      // mirror hit could have, a NaN for the mirror hit
       File.FinalRadiatorRowNumber = static_cast<std::size_t>(-1);
       File.FinalRadiatorColumnNumber = static_cast<std::size_t>(-1);
-      File.MirrorHit_x = -1.0;
-      File.MirrorHit_y = -1.0;
-      File.MirrorHit_z = -1.0;
+      const double NoMirrorHit = std::numeric_limits<double>::quiet_NaN();
+      File.MirrorHit_x = NoMirrorHit;
+      File.MirrorHit_y = NoMirrorHit;
+      File.MirrorHit_z = NoMirrorHit;
       File.SinglePhotonResolution = -1.0;
       File.TotalResolution = -1.0;
       File.Significance = -1.0;
