@@ -160,6 +160,7 @@ double GetMomentumMag() {
 	const double CherenkovAngle = TMath::ACos(CosCherenkovAngle);
 	CherenkovAngles.push_back(CherenkovAngle);
 	resolutionStruct.N++;
+	resolutionStruct.SumWeights += Photon.GetWeight();
 	resolutionStruct.CentreHitDistance += photonHit->m_CentreHitDistance;
       } else if(Photon.GetStatus() == Photon::Status::WallMiss ||
 		Photon.GetStatus() == Photon::Status::Backwards ||
@@ -171,7 +172,9 @@ double GetMomentumMag() {
     if(resolutionStruct.N > 0) {
       resolutionStruct.x = TMath::RMS(CherenkovAngles.begin(),
 				      CherenkovAngles.end());
-      resolutionStruct.x /= TMath::Sqrt(resolutionStruct.N);
+      // Divide by the physical photon count, as RunARC does, so that the
+      // photon multiplier only improves the statistics of the estimate
+      resolutionStruct.x /= TMath::Sqrt(resolutionStruct.SumWeights);
       resolutionStruct.CentreHitDistance /= resolutionStruct.N;
     }
     return resolutionStruct;

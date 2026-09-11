@@ -62,6 +62,11 @@ namespace Utilities {
      * The average photon hit position
      */
     Vector CentreHitDistance{0.0, 0.0, 0.0};
+    /**
+     * Sum of the photon weights, the physical number of photons when the photon
+     * yield is scaled by the photon multiplier (the weight is its inverse)
+     */
+    double SumWeights = 0.0;
   };
   /**
    * Thread-local random number generator used for photon generation and detection

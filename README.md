@@ -9,7 +9,7 @@ Standalone simulation, reconstruction and geometry optimisation of the ARC (Arra
 - Photon yield follows Frank–Tamm with a fixed efficiency factor (`src/ParticleTrack.cpp`, `GetPhotonYield`); photon energy is uniform in 1.55–4.31 eV, the SiPM applies a wavelength-dependent photon-detection efficiency (`src/SiPM.cpp`).
 - Tracks follow a helix if `FieldStrength` is non-zero (`src/HelixPath.cpp`); with the committed value 0.0 they are straight lines.
 - Reconstruction solves the mirror-reflection quartic for each photon (`src/PhotonReconstructor.cpp`), using both the true emission point and the mid-point of the radiator as the assumed emission point.
-- Optimisation cost (`src/ResolutionUtilities.cpp`, `CalculateResolution`): mean over tracks of the per-track resolution RMS(theta_c)/sqrt(N_photons), plus a pixel-size term, a penalty proportional to the fraction of tracks whose photons fail to reach the detector (wall or mirror miss, or fewer than two detected photons) and, during the fit, a penalty on the mean distance of the photon hits from the detector centre.
+- Optimisation cost (`src/ResolutionUtilities.cpp`, `CalculateResolution`): mean over tracks of the per-track resolution RMS(theta_c)/sqrt(N_photons), where N_photons is the sum of the photon weights (the physical photon count, so `PhotonMultiplier` and the boost below `LowMomentumLimit` only improve the statistics of the resolution estimate, as in `RunARC`), plus a pixel-size term, a penalty proportional to the fraction of tracks whose photons fail to reach the detector (wall or mirror miss, or fewer than two simulated photons detected) and, during the fit, a penalty on the mean distance of the photon hits from the detector centre.
 
 ## Requirements and build
 
