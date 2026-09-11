@@ -33,7 +33,7 @@ ParticleTrack::ParticleTrack(int ParticleID,
   m_PhotonMultiplier(GetPhotonMultiplier(m_Momentum.GlobalVector())),
   m_TrackNumber(TrackNumber),
   m_TracksToDraw(Settings::GetSizeTVector("General/TrackToDraw")),
-  m_Helix(Momentum, m_ParticleID > 0 ? +1 : -1, BField),
+  m_Helix(Momentum, ParticleMass::GetCharge(m_ParticleID), BField),
   m_PathLength(0.0) {
 }
 

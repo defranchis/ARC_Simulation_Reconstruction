@@ -12,6 +12,12 @@ namespace ParticleMass {
    * Throws std::invalid_argument if the code is not known
    */
   double GetMass(int PID);
+  /**
+   * Get the particle charge, in units of e, from its PDG code
+   * The sign of the charge is not the sign of the code for the leptons
+   * Throws std::invalid_argument if the code is not known
+   */
+  int GetCharge(int PID);
 }
 
 #endif

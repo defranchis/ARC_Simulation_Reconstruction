@@ -22,4 +22,22 @@ namespace ParticleMass {
     return iter->second;
   }
 
+  int GetCharge(int PID) {
+    // Charge of the particle with the positive PDG code, in units of e
+    static const std::map<int, int> Charge{
+      {11, -1},
+      {13, -1},
+      {15, -1},
+      {211, +1},
+      {321, +1},
+      {2212, +1}
+    };
+    auto iter = Charge.find(std::abs(PID));
+    if(iter == Charge.end()) {
+      throw std::invalid_argument("Unknown particle ID " + std::to_string(PID));
+    }
+    // Antiparticles have negative PDG codes and the opposite charge
+    return PID > 0 ? iter->second : -iter->second;
+  }
+
 }
