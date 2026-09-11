@@ -97,7 +97,7 @@ namespace ResolutionUtilities {
                                  static_cast<double>(NumberParticles);
       const double ResolutionWithPenalty = Resolution + WallPenalty;
       if(IncludeCentrePenalty) {
-        // Penalty when far from the mirror centre
+        // Penalty when far from the detector centre
         const Vector AverageRingPosition = Total.CentreHitDistance/Total.N;
         const double CentrePenalty = 0.01*TMath::Sqrt(AverageRingPosition.Mag2());
         return ResolutionWithPenalty + CentrePenalty;
@@ -235,8 +235,8 @@ namespace ResolutionUtilities {
     auto Solution4 = GetSolutionLine(Result[3], f4.GetHistogram()->GetMaximum());
     Solution4.Draw("SAME");
     c4.SaveAs("DetectorPositionOptimisation.pdf");
-    TCanvas c5("c4", "", 1200, 900);
-    f5.SetTitle("Detector tilt angle;#theta (^{o});Resolution (rad)");
+    TCanvas c5("c5", "", 1200, 900);
+    f5.SetTitle("Detector tilt angle;#theta (rad);Resolution (rad)");
     f5.Draw();
     auto Solution5 = GetSolutionLine(Result[4], f5.GetHistogram()->GetMaximum());
     Solution5.Draw("SAME");

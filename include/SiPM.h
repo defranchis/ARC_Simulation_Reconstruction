@@ -50,10 +50,6 @@ class SiPM {
   void PlotHits(const std::string &Filename,
 		const std::vector<PhotonHit> &photonHits) const;
   /**
-   * Get photon hits in SiPM
-   */
-  const std::vector<PhotonHit>& GetPhotonHits() const;
-  /**
    * Draw SiPM
    * @param RadiatorPosition The position of the radiator cell
    */

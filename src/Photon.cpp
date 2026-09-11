@@ -86,12 +86,12 @@ Photon::DrawPhotonPath() const {
 		      MirrorHitPosition.X(),
 		      Position.Z(),
 		      Position.X());
-    if(m_Status != Status::DetectorHit) {
-      PhotonLine1.SetLineColor(6);
-      PhotonLine2.SetLineColor(6);
-    } else if(m_Status == Status::DetectorMiss) {
+    if(m_Status == Status::DetectorMiss) {
       PhotonLine1.SetLineColor(8);
       PhotonLine2.SetLineColor(8);
+    } else if(m_Status != Status::DetectorHit) {
+      PhotonLine1.SetLineColor(6);
+      PhotonLine2.SetLineColor(6);
     } else {
       PhotonLine1.SetLineColor(kBlue);
       PhotonLine2.SetLineColor(kBlue);

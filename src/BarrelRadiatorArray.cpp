@@ -170,7 +170,7 @@ int BarrelRadiatorArray::FindRadiatorIndex(std::size_t i, std::size_t j) const {
       }
     }
   } else {
-    if(i != 0 && j != 0) {
+    if(i != 0 || j != 0) {
       throw std::invalid_argument("Cannot have radiator cell index ("
 				  + std::to_string(i)
 				  + ", "

@@ -4,7 +4,7 @@
  */
 
 #ifndef HALFRADIATORCELL
-#define HAlFRADIATORCELL
+#define HALFRADIATORCELL
 
 #include"BarrelRadiatorCell.h"
 
