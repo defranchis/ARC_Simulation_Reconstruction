@@ -6,6 +6,8 @@
 #include<fstream>
 #include<iostream>
 #include<sstream>
+#include<string>
+#include<stdexcept>
 #include"TCanvas.h"
 #include"TF1.h"
 #include"TLine.h"
@@ -29,6 +31,15 @@ namespace ResolutionUtilities {
   using Utilities::ResolutionStruct;
 
   namespace {
+    /**
+     * Suffixes of the parameter names written to and read from the fit result file
+     */
+    constexpr std::array<std::string_view, 5> ParameterNames{
+      "Curvature",
+      "XPosition",
+      "ZPosition",
+      "DetPosition",
+      "DetTilt"};
     /**
      * Number of OpenMP threads used in the track loop when Optimisation/NumberThreads is not set
      */
@@ -129,6 +140,9 @@ namespace ResolutionUtilities {
                        const Tracks &Particles) {
     std::string ResultFilename = Settings::GetString("Optimisation/Filename");
     std::ifstream File(ResultFilename);
+    if(!File.is_open()) {
+      throw std::runtime_error("Cannot open fit result file " + ResultFilename);
+    }
     std::vector<double> Result;
     std::string Line;
     while(std::getline(File, Line)) {
@@ -139,6 +153,12 @@ namespace ResolutionUtilities {
       Result.push_back(Value);
     }
     File.close();
+    const std::size_t NumberParameters = ParameterNames.size();
+    if(Result.size() != NumberParameters) {
+      throw std::runtime_error("Expected " + std::to_string(NumberParameters)
+			       + " parameters in " + ResultFilename
+			       + ", found " + std::to_string(Result.size()));
+    }
     const std::size_t Seed = Settings::GetSizeT("General/Seed");
     auto MinimiseFunctionMirrorCurvature = [&] (double *x, double*) {
       return fcn(x[0], Result[1], Result[2], Result[3], Result[4],
@@ -241,12 +261,6 @@ namespace ResolutionUtilities {
     auto FixedParameters = resolutionOptimisable.GetFixedParameters();
     std::size_t TotalParameters = Result.size() + FixedParameters.size();
     std::vector<double> AllParameters;
-    constexpr std::array<std::string_view, 5> ParameterNames{
-      "Curvature",
-      "XPosition",
-      "ZPosition",
-      "DetPosition",
-      "DetTilt"};
     std::size_t j = 0;
     for(std::size_t i = 0; i < TotalParameters; i++) {
       auto iter = FixedParameters.find(i);
