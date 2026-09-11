@@ -6,6 +6,7 @@
 #ifndef TRACKINGVOLUME
 #define TRACKINGVOLUME
 
+#include<cstddef>
 #include<memory>
 #include<utility>
 #include<string>
@@ -42,7 +43,7 @@ class TrackingVolume {
   /**
    * Number of cells in theta direction
    */
-  const int m_CellsPerRow;
+  const std::size_t m_CellsPerRow;
   /**
    * The magnetic field strength
    */

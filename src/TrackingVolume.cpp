@@ -12,7 +12,7 @@
 TrackingVolume::TrackingVolume():
   m_Radius(Settings::GetDouble("ARCGeometry/Radius")),
   m_Length(Settings::GetDouble("ARCGeometry/Length")),
-  m_CellsPerRow(Settings::GetInt("ARCGeometry/CellsPerRow")),
+  m_CellsPerRow(Settings::GetSizeT("ARCGeometry/CellsPerRow")),
   m_FieldStrength(Settings::GetDouble("ARCGeometry/FieldStrength")) {
 }
 

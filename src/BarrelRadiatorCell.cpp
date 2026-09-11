@@ -17,6 +17,17 @@
 using RotationY = ROOT::Math::RotationY;
 using RotationZ = ROOT::Math::RotationZ;
 
+namespace {
+  /**
+   * The number of cells in the main row, read from the settings once
+   */
+  std::size_t NumberMainRowCells() {
+    static const std::size_t Cells =
+      Settings::GetSizeT("ARCGeometry/CellsPerRow");
+    return Cells;
+  }
+}
+
 BarrelRadiatorCell::BarrelRadiatorCell(std::size_t CellColumnNumber,
 				       std::size_t CellRowNumber,
 				       double HexagonSize):
@@ -168,7 +179,7 @@ Vector BarrelRadiatorCell::GetCellPosition(std::size_t CellColumnNumber,
 					   std::size_t CellRowNumber,
 					   double HexagonSize) {
   // The upper row ends with a half cell, one column beyond the main row
-  if(CellColumnNumber > Settings::GetSizeT("ARCGeometry/CellsPerRow")) {
+  if(CellColumnNumber > NumberMainRowCells()) {
     throw std::invalid_argument("Invalid cell column number: "
 				+ std::to_string(CellColumnNumber));
   }
@@ -211,6 +222,8 @@ Rotation3D BarrelRadiatorCell::GetCellOrientation(double HexagonSize,
 }
 
 bool BarrelRadiatorCell::IsEdgeCell() const {
-  return (m_CellNumber == std::make_pair(std::size_t{8}, std::size_t{1}) ||
-         m_CellNumber == std::make_pair(std::size_t{9}, std::size_t{2}));
+  // The last cell of the main row, and the half cell that ends the upper row
+  const std::size_t LastColumn = NumberMainRowCells();
+  return (m_CellNumber == std::make_pair(LastColumn - 1, std::size_t{1}) ||
+	  m_CellNumber == std::make_pair(LastColumn, std::size_t{2}));
 }
