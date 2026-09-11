@@ -204,18 +204,20 @@ int main(int argc, char *argv[]) {
       particleTrack.GetParticleLocation() == ParticleTrack::Location::Mirror
       ? particleTrack.GeneratePhotonsFromGas() : std::vector<Photon>();
     std::vector<PhotonHit> photonHits;
+    // Only the photons that are detected belong in the hit map
     for(auto &photon : PhotonsAerogel) {
       auto photonHit = PhotonMapper::TracePhoton(photon, *radiatorArray);
-      if(photonHit) {
+      if(photonHit && photon.GetStatus() == Photon::Status::DetectorHit) {
 	photonHits.push_back(*photonHit);
       }
     }
     for(auto &photon : PhotonsGas) {
       auto photonHit = PhotonMapper::TracePhoton(photon, *radiatorArray);
-      if(photonHit) {
+      if(photonHit && photon.GetStatus() == Photon::Status::DetectorHit) {
 	photonHits.push_back(*photonHit);
       }
     }
+    std::cout << "Plotting " << photonHits.size() << " detected photon hits\n";
     particleTrack.GetRadiatorCell()->GetDetector().PlotHits("PhotonHits.pdf", photonHits);
   } else if(RunMode == "CherenkovAngleResolution") {
     std::cout << "Run mode: Cherenkov angle resolution\n";
