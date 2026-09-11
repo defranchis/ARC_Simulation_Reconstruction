@@ -182,12 +182,12 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>              MirrorHitPosition.X(),</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>              Position.Z(),</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>              Position.X());</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordflow">if</span>(m_Status != <a class="code hl_enumvalue" href="classPhoton.html#a0df9b727fe848572dd2d662415ae1e8da168061887e2c7130e166f4f2c8dd0e78">Status::DetectorHit</a>) {</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>      PhotonLine1.SetLineColor(6);</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>      PhotonLine2.SetLineColor(6);</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(m_Status == <a class="code hl_enumvalue" href="classPhoton.html#a0df9b727fe848572dd2d662415ae1e8daf8c5958d10e5fe779c520ee845fe7b7b">Status::DetectorMiss</a>) {</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>      PhotonLine1.SetLineColor(8);</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>      PhotonLine2.SetLineColor(8);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordflow">if</span>(m_Status == <a class="code hl_enumvalue" href="classPhoton.html#a0df9b727fe848572dd2d662415ae1e8daf8c5958d10e5fe779c520ee845fe7b7b">Status::DetectorMiss</a>) {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>      PhotonLine1.SetLineColor(8);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>      PhotonLine2.SetLineColor(8);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(m_Status != <a class="code hl_enumvalue" href="classPhoton.html#a0df9b727fe848572dd2d662415ae1e8da168061887e2c7130e166f4f2c8dd0e78">Status::DetectorHit</a>) {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>      PhotonLine1.SetLineColor(6);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>      PhotonLine2.SetLineColor(6);</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>      PhotonLine1.SetLineColor(kBlue);</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>      PhotonLine2.SetLineColor(kBlue);</div>
@@ -447,7 +447,7 @@ $(function(){ initResizable(false); });
 <div class="ttc" id="aclassRadiatorCell_html"><div class="ttname"><a href="classRadiatorCell.html">RadiatorCell</a></div><div class="ttdef"><b>Definition</b> <a href="RadiatorCell_8h_source.html#l00028">RadiatorCell.h:28</a></div></div>
 <div class="ttc" id="aclassRadiatorCell_html_a75c9abe651d9c8ef556b41a21a7ba4ae"><div class="ttname"><a href="classRadiatorCell.html#a75c9abe651d9c8ef556b41a21a7ba4ae">RadiatorCell::GetRadiatorPosition</a></div><div class="ttdeci">const Vector &amp; GetRadiatorPosition() const</div><div class="ttdef"><b>Definition</b> <a href="RadiatorCell_8cpp_source.html#l00097">RadiatorCell.cpp:97</a></div></div>
 <div class="ttc" id="aclassRadiatorCell_html_a83f2be3d3229adeda6c9325d99e6e196"><div class="ttname"><a href="classRadiatorCell.html#a83f2be3d3229adeda6c9325d99e6e196">RadiatorCell::GetRadiatorRotation</a></div><div class="ttdeci">const Rotation3D &amp; GetRadiatorRotation() const</div><div class="ttdef"><b>Definition</b> <a href="RadiatorCell_8cpp_source.html#l00101">RadiatorCell.cpp:101</a></div></div>
-<div class="ttc" id="aclassSettings_html_ab14c9cd8c9e5eaa7af25ec97cf27cc06"><div class="ttname"><a href="classSettings.html#ab14c9cd8c9e5eaa7af25ec97cf27cc06">Settings::GetSizeT</a></div><div class="ttdeci">static std::size_t GetSizeT(const std::string &amp;Setting)</div><div class="ttdef"><b>Definition</b> <a href="Settings_8cpp_source.html#l00068">Settings.cpp:68</a></div></div>
+<div class="ttc" id="aclassSettings_html_ab14c9cd8c9e5eaa7af25ec97cf27cc06"><div class="ttname"><a href="classSettings.html#ab14c9cd8c9e5eaa7af25ec97cf27cc06">Settings::GetSizeT</a></div><div class="ttdeci">static std::size_t GetSizeT(const std::string &amp;Setting)</div><div class="ttdef"><b>Definition</b> <a href="Settings_8cpp_source.html#l00174">Settings.cpp:174</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
