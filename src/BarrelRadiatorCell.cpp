@@ -167,7 +167,8 @@ bool BarrelRadiatorCell::IsDetectorInsideCell() const {
 Vector BarrelRadiatorCell::GetCellPosition(std::size_t CellColumnNumber,
 					   std::size_t CellRowNumber,
 					   double HexagonSize) {
-  if(CellColumnNumber > 9) {
+  // The upper row ends with a half cell, one column beyond the main row
+  if(CellColumnNumber > Settings::GetSizeT("ARCGeometry/CellsPerRow")) {
     throw std::invalid_argument("Invalid cell column number: "
 				+ std::to_string(CellColumnNumber));
   }

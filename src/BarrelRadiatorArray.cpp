@@ -63,7 +63,8 @@ const RadiatorCell* BarrelRadiatorArray::FindRadiator(Particle &particle) const 
     const double Radius = TMath::Sqrt(Position.X()*Position.X() +
 				      Position.Y()*Position.Y());
     // Check if particle hits outside half cell
-    if(x > 8.5*m_xHexDist) {
+    // The main row ends half a cell beyond the centre of the last cell
+    if(x > (static_cast<double>(m_NumberMainRowCells) - 0.5)*m_xHexDist) {
       return nullptr;
     }
     // Account for curvature when calculating y coordinate (azimuthal)
@@ -153,13 +154,15 @@ int BarrelRadiatorArray::FindRadiatorIndex(std::size_t i, std::size_t j) const {
 				  + ") does not exist");
     } else {
       if(j == 1) {
-	if(i > 8) {
+	// The main row is numbered from zero
+	if(i >= m_NumberMainRowCells) {
 	  return -1;
 	} else {
 	  return static_cast<int>(i);
 	}
       } else {
-	if(i > 9) {
+	// The upper row is numbered from one and ends with the half cell
+	if(i > m_NumberMainRowCells) {
 	  return -1;
 	} else {
 	  return static_cast<int>(m_NumberMainRowCells + i - 1);
