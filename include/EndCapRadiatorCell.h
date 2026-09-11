@@ -62,7 +62,7 @@ class EndCapRadiatorCell: public RadiatorCell {
   /**
    * All the cell numbers that are invalid, but next to valid cells for the end cap
    */
-  static constexpr std::array<std::pair<std::size_t, std::size_t>, 7>
+  static constexpr std::array<std::pair<std::size_t, std::size_t>, 1>
   m_NotValidCells{{
     /*{8, 1}, {9, 2}, {8, 3}, {8, 4}, {7, 5},
     {0, 1}, {1, 2}*/

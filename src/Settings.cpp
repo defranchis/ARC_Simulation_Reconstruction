@@ -42,7 +42,12 @@ std::string Settings::GetString(const std::string &Setting) {
   std::string Name = Setting.substr(0, SlashPos);
   auto iter1 = m_Settings.find(Name);
   if(iter1 == m_Settings.end()) {
-    throw std::runtime_error("Cannot find settings name " + Name);
+    std::string Known;
+    for(const auto &[KnownName, KnownSettings] : m_Settings) {
+      Known += " " + KnownName;
+    }
+    throw std::runtime_error("Cannot find settings name " + Name
+			     + ", the settings added are:" + Known);
   }
   std::string Key = Setting.substr(SlashPos + 1);
   auto iter2 = iter1->second.find(Key);
