@@ -62,7 +62,8 @@ bool ParticleTrack::TrackThroughTracker(const TrackingVolume &InnerTracker) {
 						     0.95*BarrelZ,
 						     3.0*BarrelZ);
     if(Tracker_s == -999.0) {
-      throw std::runtime_error("Track did not reach end cap");
+      // Most likely the track didn't reach the end cap
+      return false;
     }
     const auto NewPosition = m_Helix.GetPosition(Tracker_s);
     m_Position.SetGlobalVector(NewPosition);

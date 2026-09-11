@@ -94,7 +94,10 @@ int main(int argc, char *argv[]) {
     const Vector Momentum = GetMomentum();
     ParticleTrack particleTrack(ParticleID, Momentum,
 				NumberTracks, InnerTracker.GetFieldStrength());
-    particleTrack.TrackThroughTracker(InnerTracker);
+    if(!particleTrack.TrackThroughTracker(InnerTracker)) {
+      // Track didn't reach the radiator array, generate another one
+      continue;
+    }
     Particles.push_back(particleTrack);
     NumberTracks++;
   }
