@@ -21,5 +21,6 @@ var searchData=
   ['solvepathlength_18',['SolvePathLength',['../classHelixPath.html#a0f0836dc7fbb1355ded8fd35cf266a65',1,'HelixPath']]],
   ['solvequartic_19',['SolveQuartic',['../namespacePhotonReconstructor.html#ab6b638a1f3d2908a456b88c50298e00d',1,'PhotonReconstructor']]],
   ['ssmap_20',['ssMap',['../Settings_8h.html#a960595b7b0b97c77d28c9016ed8513c4',1,'Settings.h']]],
-  ['status_21',['Status',['../classPhoton.html#a0df9b727fe848572dd2d662415ae1e8d',1,'Photon']]]
+  ['status_21',['Status',['../classPhoton.html#a0df9b727fe848572dd2d662415ae1e8d',1,'Photon']]],
+  ['sumweights_22',['SumWeights',['../structUtilities_1_1ResolutionStruct.html#a3f405938997a95910eac808a2b3ad0dd',1,'Utilities::ResolutionStruct::SumWeights'],['../structResolutionUtilities_1_1ResolutionStruct.html#a3f405938997a95910eac808a2b3ad0dd',1,'ResolutionUtilities::ResolutionStruct::SumWeights']]]
 ];
