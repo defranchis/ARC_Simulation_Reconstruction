@@ -240,14 +240,15 @@ int main(int argc, char *argv[]) {
       File.NumberPhotons = 0;
       File.NumberGoodPhotons = 0.0;
       File.TrackNumber = i;
-      File.RadiatorRowNumber = static_cast<std::size_t>(-1);
-      File.RadiatorColumnNumber = static_cast<std::size_t>(-1);
+      constexpr std::size_t NoCell = static_cast<std::size_t>(-1);
+      File.RadiatorRowNumber = NoCell;
+      File.RadiatorColumnNumber = NoCell;
       // Tracks that are filled early never reach the code below, so the
       // branches are reset to sentinels: -1 for the resolutions, the largest
       // std::size_t for the cell indices and, since -1 m is a position a
       // mirror hit could have, a NaN for the mirror hit
-      File.FinalRadiatorRowNumber = static_cast<std::size_t>(-1);
-      File.FinalRadiatorColumnNumber = static_cast<std::size_t>(-1);
+      File.FinalRadiatorRowNumber = NoCell;
+      File.FinalRadiatorColumnNumber = NoCell;
       const double NoMirrorHit = std::numeric_limits<double>::quiet_NaN();
       File.MirrorHit_x = NoMirrorHit;
       File.MirrorHit_y = NoMirrorHit;

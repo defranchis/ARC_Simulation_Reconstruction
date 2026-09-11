@@ -52,8 +52,8 @@ int main(int argc, char *argv[]) {
   const TrackingVolume InnerTracker;
   const auto ColumnAndRow = [argv] () {
     try {
-      return std::make_pair(std::stoi(std::string(argv[1])),
-                            std::stoi(std::string(argv[2])));
+      return std::make_pair(Settings::ParseInt("command line/column", argv[1]),
+                            Settings::ParseInt("command line/row", argv[2]));
     } catch(const std::exception&) {
       return std::make_pair(-1, -1);
     }

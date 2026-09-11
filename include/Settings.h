@@ -39,6 +39,12 @@ class Settings {
    */
   static int GetInt(const std::string &Setting);
   /**
+   * Convert a value to an integer, consuming it in full; Setting is a
+   * "Name/Key" used only in the error message, so command-line arguments
+   * can be converted with the same rule as settings
+   */
+  static int ParseInt(const std::string &Setting, const std::string &Value);
+  /**
    * Get unsigned integer setting
    */
   static std::size_t GetSizeT(const std::string &Setting);

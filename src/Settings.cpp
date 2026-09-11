@@ -41,7 +41,7 @@ namespace {
     }
     return Number;
   }
-  int ParseInt(const std::string &Setting, const std::string &Value) {
+  int ParseIntValue(const std::string &Setting, const std::string &Value) {
     std::size_t CharactersUsed = 0;
     const int Integer = std::stoi(Value, &CharactersUsed);
     if(CharactersUsed != Value.size()) {
@@ -50,7 +50,7 @@ namespace {
     return Integer;
   }
   std::size_t ParseSizeT(const std::string &Setting, const std::string &Value) {
-    const int Integer = ParseInt(Setting, Value);
+    const int Integer = ParseIntValue(Setting, Value);
     if(Integer < 0 || Value.rfind('-', 0) == 0) {
       throw std::runtime_error("Cannot load negative value '" + Value + "' of "
                                + SettingName(Setting) + " into std::size_t");
@@ -168,7 +168,7 @@ double Settings::GetDouble(const std::string &Setting) {
 }
 
 int Settings::GetInt(const std::string &Setting) {
-  return ParseInt(Setting, GetString(Setting));
+  return ParseIntValue(Setting, GetString(Setting));
 }
 
 std::size_t Settings::GetSizeT(const std::string &Setting) {
@@ -190,7 +190,7 @@ bool Settings::GetBool(const std::string &Setting) {
 std::vector<int> Settings::GetIntVector(const std::string &Setting) {
   std::vector<int> List;
   for(const auto &Entry : SplitList(Setting, GetRawString(Setting))) {
-    List.push_back(ParseInt(Setting, Entry));
+    List.push_back(ParseIntValue(Setting, Entry));
   }
   return List;
 }
@@ -211,4 +211,8 @@ bool Settings::Exists(const std::string &Setting) {
     return false;
   }
   return iter1->second.find(Setting.substr(SlashPos + 1)) != iter1->second.end();
+}
+
+int Settings::ParseInt(const std::string &Setting, const std::string &Value) {
+  return ParseIntValue(Setting, Value);
 }
