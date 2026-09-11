@@ -145,9 +145,10 @@ class SiPM {
     0.59, 0.57, 0.56, 0.53,
     0.51, 0.40, 0.26, 0.13};
   /**
-   * Interpolator for PDE
+   * Interpolator for PDE, one per thread because Eval updates the lookup
+   * cache inside the GSL interpolator and the track loop runs in parallel
    */
-  static const Interpolator m_Interpolator;
+  static thread_local const Interpolator m_Interpolator;
 };
 
 #endif

@@ -180,7 +180,7 @@ void SiPM::SetDetectorTilt(double Angle) {
   }
 }
 
-const Interpolator SiPM::m_Interpolator{
+thread_local const Interpolator SiPM::m_Interpolator{
   std::vector<double>(m_Lambda.begin(), m_Lambda.end()),
   std::vector<double>(m_PDE.begin(), m_PDE.end()),
   InterpolationType::kAKIMA
