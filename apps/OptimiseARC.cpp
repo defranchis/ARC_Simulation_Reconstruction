@@ -1,7 +1,7 @@
 // Martin Duy Tat 1st May 2022
 /**
  * OptimiseARC is an application for optimising an ARC cell
- * Run with RunARC ColumnNumber RowNumber <settings name> <settings filename> ...
+ * Run with OptimiseARC ColumnNumber RowNumber <settings name> <settings filename> ...
  * There can be an arbitrary number of settings files added
  */
 
@@ -12,6 +12,7 @@
 #include<fstream>
 #include<array>
 #include<memory>
+#include<stdexcept>
 #include"TRandom.h"
 #include"Math/Vector3Dfwd.h"
 #include"Math/DisplacementVector3D.h"
@@ -31,7 +32,9 @@ using Tracks = std::vector<ParticleTrack>;
 
 int main(int argc, char *argv[]) {
   if(argc%2 != 1 || argc < 3) {
-    return 0;
+    std::cerr << "Usage: OptimiseARC ColumnNumber RowNumber <settings name> "
+              << "<settings filename> ...\n";
+    return 1;
   }
   std::cout << "Welcome to the ARC optimiser\n";
   for(int i = 3; i < argc; i += 2) {
@@ -41,18 +44,27 @@ int main(int argc, char *argv[]) {
     std::cout << "Added " << SettingsName << " settings from ";
     std::cout << SettingsFilename << "\n";
   }
-  const std::string RunMode(argv[1]);
   const std::size_t Seed = Settings::GetSizeT("General/Seed");
   gRandom->SetSeed(Seed);
   Utilities::Random().SetSeed(Seed);
   std::cout << "Generating tracks...\n";
   const int ParticleID = Settings::GetInt("Particle/ID");;
   const TrackingVolume InnerTracker;
-  const std::size_t Column =
-    static_cast<std::size_t>(std::stoi(std::string(argv[1])));
-  const std::size_t Row =
-    static_cast<std::size_t>(std::stoi(std::string(argv[2])));
-  std::cout << "Tracks ready\n";
+  const auto ColumnAndRow = [argv] () {
+    try {
+      return std::make_pair(std::stoi(std::string(argv[1])),
+                            std::stoi(std::string(argv[2])));
+    } catch(const std::exception&) {
+      return std::make_pair(-1, -1);
+    }
+  }();
+  if(ColumnAndRow.first < 0 || ColumnAndRow.second < 0) {
+    std::cerr << "Cannot use \"" << argv[1] << "\" and \"" << argv[2]
+              << "\" as a column and row number, they must be non-negative integers\n";
+    return 1;
+  }
+  const std::size_t Column = static_cast<std::size_t>(ColumnAndRow.first);
+  const std::size_t Row = static_cast<std::size_t>(ColumnAndRow.second);
   std::unique_ptr<RadiatorArray> radiatorArray;
   const std::string BarrelOrEndcap =
     Settings::GetString("General/BarrelOrEndcap");
@@ -61,7 +73,9 @@ int main(int argc, char *argv[]) {
   } else if(BarrelOrEndcap == "EndCap") {
     radiatorArray = std::make_unique<EndCapRadiatorArray>();
   } else {
-    return 0;
+    std::cerr << "Unknown General/BarrelOrEndcap setting \"" << BarrelOrEndcap
+              << "\", must be \"Barrel\" or \"EndCap\"\n";
+    return 1;
   }
   RadiatorCell *radiatorCell = radiatorArray->GetRadiatorCell(Column, Row);
   if(!radiatorCell) {
@@ -101,6 +115,7 @@ int main(int argc, char *argv[]) {
     Particles.push_back(particleTrack);
     NumberTracks++;
   }
+  std::cout << "Tracks ready\n";
   if(Settings::GetBool("Optimisation/SinglePoints")) {
     while(true) {
       std::cout << "Input parameters:\n";

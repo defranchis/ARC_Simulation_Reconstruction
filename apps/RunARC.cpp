@@ -141,7 +141,8 @@ struct CherenkovFile {
 
 int main(int argc, char *argv[]) {
   if(argc%2 != 0) {
-    return 0;
+    std::cerr << "Usage: RunARC <run mode> <settings name> <settings filename> ...\n";
+    return 1;
   }
   std::cout << "Welcome to the ARC simulation and reconstruction\n";
   for(int i = 2; i < argc; i += 2) {
@@ -165,8 +166,10 @@ int main(int argc, char *argv[]) {
   } else if(BarrelOrEndcap == "EndCap") {
     radiatorArray = std::make_unique<EndCapRadiatorArray>();
   } else {
-    return 0;
-  } 
+    std::cerr << "Unknown General/BarrelOrEndcap setting \"" << BarrelOrEndcap
+              << "\", must be \"Barrel\" or \"EndCap\"\n";
+    return 1;
+  }
   eventDisplay.AddObject(radiatorArray->DrawRadiatorArray());
   if(RunMode == "SingleTrack") {
     std::cout << "Run mode: Single track\n";
@@ -357,6 +360,10 @@ int main(int argc, char *argv[]) {
     }
     eventDisplay.DrawEventDisplay();
     File.Close();
+  } else {
+    std::cerr << "Unknown run mode \"" << RunMode
+              << "\", must be \"SingleTrack\" or \"CherenkovAngleResolution\"\n";
+    return 1;
   }
   return 0;
 }
