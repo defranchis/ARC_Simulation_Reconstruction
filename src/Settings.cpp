@@ -19,6 +19,10 @@ void Settings::AddSettings(const std::string &Name, const std::string &Filename)
   }
   ssMap NewSettings;
   std::ifstream File(Filename);
+  if(!File.is_open()) {
+    throw std::runtime_error("Cannot open settings file " + Filename
+			     + " for settings " + Name);
+  }
   std::string Line;
   while(std::getline(File, Line)) {
     Line = Line.substr(0, Line.find('#'));
