@@ -186,7 +186,10 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="classHelixPath.html#ac28d224200a140f26edc7edbe2b06d79">   78</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classHelixPath.html#ac28d224200a140f26edc7edbe2b06d79">HelixPath::ReflectY</a>() {</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  m_n.SetY(-m_n.Y());</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  m_Origin.SetY(-m_Origin.Y());</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>}</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  <span class="comment">// The mirror image of a helix bends the other way, like the opposite charge</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  m_Radius = -m_Radius;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  m_InvRadius = -m_InvRadius;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}</div>
 </div>
 <div class="ttc" id="aARCVector_8h_html_ac21e558cd6d8c2f9488feb4e16579394"><div class="ttname"><a href="ARCVector_8h.html#ac21e558cd6d8c2f9488feb4e16579394">Vector</a></div><div class="ttdeci">ROOT::Math::XYZVector Vector</div><div class="ttdef"><b>Definition</b> <a href="ARCVector_8h_source.html#l00019">ARCVector.h:19</a></div></div>
 <div class="ttc" id="aHelixFunctor_8h_html"><div class="ttname"><a href="HelixFunctor_8h.html">HelixFunctor.h</a></div></div>

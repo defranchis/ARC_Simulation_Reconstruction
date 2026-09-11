@@ -183,44 +183,47 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keyword">const</span> <a class="code hl_typedef" href="ARCVector_8h.html#ac21e558cd6d8c2f9488feb4e16579394">Vector</a> Momentum = GetMomentum();</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <a class="code hl_class" href="classParticleTrack.html">ParticleTrack</a> particleTrack(ParticleID, Momentum,</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                NumberTracks, InnerTracker.<a class="code hl_function" href="classTrackingVolume.html#a5f4aa7a45429780422221b4ccf64da55">GetFieldStrength</a>());</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    particleTrack.<a class="code hl_function" href="classParticleTrack.html#a072a16d648737613ff4df1e9d5ad5bfe">TrackThroughTracker</a>(InnerTracker);</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    Particles.push_back(particleTrack);</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    NumberTracks++;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  }</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  <span class="keywordflow">if</span>(<a class="code hl_function" href="classSettings.html#aad3095391d8ffe6f92cfb957cd9cfd1a">Settings::GetBool</a>(<span class="stringliteral">&quot;Optimisation/SinglePoints&quot;</span>)) {</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordflow">while</span>(<span class="keyword">true</span>) {</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>      std::cout &lt;&lt; <span class="stringliteral">&quot;Input parameters:\n&quot;</span>;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>      std::array&lt;double, 5&gt; x;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>      <span class="keywordflow">for</span>(<span class="keywordtype">double</span> &amp;xx : x) {</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    std::cin &gt;&gt; xx;</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>      }</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>      <span class="keywordtype">double</span> Value = <a class="code hl_function" href="namespaceResolutionUtilities.html#abb698ae8159e318dbc72cb2ba348667d">ResolutionUtilities::fcn</a>(x[0], x[1], x[2], x[3], x[4],</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                          *radiatorCell, *radiatorArray,</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                          Particles, Seed, <span class="keyword">false</span>);</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>      std::cout &lt;&lt; <span class="stringliteral">&quot;fcn = &quot;</span> &lt;&lt; Value &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>      std::cout &lt;&lt; <span class="stringliteral">&quot;Calculate new value?(y/n)\n&quot;</span>;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>      std::string Answer;</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>      std::cin &gt;&gt; Answer;</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>      <span class="keywordflow">if</span>(Answer != <span class="stringliteral">&quot;y&quot;</span>) {</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>      }</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    }</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  }</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  <span class="keywordflow">if</span>(<a class="code hl_function" href="classSettings.html#aad3095391d8ffe6f92cfb957cd9cfd1a">Settings::GetBool</a>(<span class="stringliteral">&quot;Optimisation/DoFit&quot;</span>)) {</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;Differential evolution ready, sending off agents...\n&quot;</span>;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <a class="code hl_function" href="namespaceResolutionUtilities.html#a6f90f165a510d7bf0242a8f2bfbdd391">ResolutionUtilities::DoFit</a>(*radiatorCell, *radiatorArray,</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                   Particles, Column, Row);</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;ARC is optimised!\n&quot;</span>;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  }</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  <span class="keywordflow">if</span>(<a class="code hl_function" href="classSettings.html#aad3095391d8ffe6f92cfb957cd9cfd1a">Settings::GetBool</a>(<span class="stringliteral">&quot;Optimisation/PlotProjections&quot;</span>)) {</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;Plotting...\n&quot;</span>;</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <a class="code hl_function" href="namespaceResolutionUtilities.html#a3485a4adcc26d54f7307024b1ba60a61">ResolutionUtilities::PlotProjections</a>(*radiatorCell,</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>                     *radiatorArray,</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>                     Particles);</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;Resolution projections plotted\n&quot;</span>;</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  }</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>}</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordflow">if</span>(!particleTrack.<a class="code hl_function" href="classParticleTrack.html#a072a16d648737613ff4df1e9d5ad5bfe">TrackThroughTracker</a>(InnerTracker)) {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>      <span class="comment">// Track didn&#39;t reach the radiator array, generate another one</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>      <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    }</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    Particles.push_back(particleTrack);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    NumberTracks++;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  }</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  <span class="keywordflow">if</span>(<a class="code hl_function" href="classSettings.html#aad3095391d8ffe6f92cfb957cd9cfd1a">Settings::GetBool</a>(<span class="stringliteral">&quot;Optimisation/SinglePoints&quot;</span>)) {</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keywordflow">while</span>(<span class="keyword">true</span>) {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>      std::cout &lt;&lt; <span class="stringliteral">&quot;Input parameters:\n&quot;</span>;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>      std::array&lt;double, 5&gt; x;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>      <span class="keywordflow">for</span>(<span class="keywordtype">double</span> &amp;xx : x) {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    std::cin &gt;&gt; xx;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>      }</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>      <span class="keywordtype">double</span> Value = <a class="code hl_function" href="namespaceResolutionUtilities.html#abb698ae8159e318dbc72cb2ba348667d">ResolutionUtilities::fcn</a>(x[0], x[1], x[2], x[3], x[4],</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                          *radiatorCell, *radiatorArray,</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                          Particles, Seed, <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>      std::cout &lt;&lt; <span class="stringliteral">&quot;fcn = &quot;</span> &lt;&lt; Value &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>      std::cout &lt;&lt; <span class="stringliteral">&quot;Calculate new value?(y/n)\n&quot;</span>;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>      std::string Answer;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>      std::cin &gt;&gt; Answer;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>      <span class="keywordflow">if</span>(Answer != <span class="stringliteral">&quot;y&quot;</span>) {</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>      }</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    }</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  }</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  <span class="keywordflow">if</span>(<a class="code hl_function" href="classSettings.html#aad3095391d8ffe6f92cfb957cd9cfd1a">Settings::GetBool</a>(<span class="stringliteral">&quot;Optimisation/DoFit&quot;</span>)) {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;Differential evolution ready, sending off agents...\n&quot;</span>;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <a class="code hl_function" href="namespaceResolutionUtilities.html#a6f90f165a510d7bf0242a8f2bfbdd391">ResolutionUtilities::DoFit</a>(*radiatorCell, *radiatorArray,</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                   Particles, Column, Row);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;ARC is optimised!\n&quot;</span>;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  }</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  <span class="keywordflow">if</span>(<a class="code hl_function" href="classSettings.html#aad3095391d8ffe6f92cfb957cd9cfd1a">Settings::GetBool</a>(<span class="stringliteral">&quot;Optimisation/PlotProjections&quot;</span>)) {</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;Plotting...\n&quot;</span>;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <a class="code hl_function" href="namespaceResolutionUtilities.html#a3485a4adcc26d54f7307024b1ba60a61">ResolutionUtilities::PlotProjections</a>(*radiatorCell,</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                     *radiatorArray,</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                     Particles);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;Resolution projections plotted\n&quot;</span>;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  }</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>}</div>
 </div>
 <div class="ttc" id="aARCVector_8h_html_ac21e558cd6d8c2f9488feb4e16579394"><div class="ttname"><a href="ARCVector_8h.html#ac21e558cd6d8c2f9488feb4e16579394">Vector</a></div><div class="ttdeci">ROOT::Math::XYZVector Vector</div><div class="ttdef"><b>Definition</b> <a href="ARCVector_8h_source.html#l00019">ARCVector.h:19</a></div></div>
 <div class="ttc" id="aBarrelRadiatorArray_8h_html"><div class="ttname"><a href="BarrelRadiatorArray_8h.html">BarrelRadiatorArray.h</a></div></div>
@@ -238,11 +241,11 @@ $(function(){ initResizable(false); });
 <div class="ttc" id="aclassParticleTrack_html"><div class="ttname"><a href="classParticleTrack.html">ParticleTrack</a></div><div class="ttdef"><b>Definition</b> <a href="ParticleTrack_8h_source.html#l00022">ParticleTrack.h:22</a></div></div>
 <div class="ttc" id="aclassParticleTrack_html_a072a16d648737613ff4df1e9d5ad5bfe"><div class="ttname"><a href="classParticleTrack.html#a072a16d648737613ff4df1e9d5ad5bfe">ParticleTrack::TrackThroughTracker</a></div><div class="ttdeci">bool TrackThroughTracker(const TrackingVolume &amp;InnerTracker)</div><div class="ttdef"><b>Definition</b> <a href="ParticleTrack_8cpp_source.html#l00040">ParticleTrack.cpp:40</a></div></div>
 <div class="ttc" id="aclassRadiatorCell_html"><div class="ttname"><a href="classRadiatorCell.html">RadiatorCell</a></div><div class="ttdef"><b>Definition</b> <a href="RadiatorCell_8h_source.html#l00028">RadiatorCell.h:28</a></div></div>
-<div class="ttc" id="aclassSettings_html_a01d1239a36787c50be27f894112c267e"><div class="ttname"><a href="classSettings.html#a01d1239a36787c50be27f894112c267e">Settings::GetDouble</a></div><div class="ttdeci">static double GetDouble(const std::string &amp;Setting)</div><div class="ttdef"><b>Definition</b> <a href="Settings_8cpp_source.html#l00055">Settings.cpp:55</a></div></div>
+<div class="ttc" id="aclassSettings_html_a01d1239a36787c50be27f894112c267e"><div class="ttname"><a href="classSettings.html#a01d1239a36787c50be27f894112c267e">Settings::GetDouble</a></div><div class="ttdeci">static double GetDouble(const std::string &amp;Setting)</div><div class="ttdef"><b>Definition</b> <a href="Settings_8cpp_source.html#l00060">Settings.cpp:60</a></div></div>
 <div class="ttc" id="aclassSettings_html_a56694567ec060ea2e6653fe64ef34b4b"><div class="ttname"><a href="classSettings.html#a56694567ec060ea2e6653fe64ef34b4b">Settings::AddSettings</a></div><div class="ttdeci">static void AddSettings(const std::string &amp;Name, const std::string &amp;Filename)</div><div class="ttdef"><b>Definition</b> <a href="Settings_8cpp_source.html#l00016">Settings.cpp:16</a></div></div>
-<div class="ttc" id="aclassSettings_html_aad3095391d8ffe6f92cfb957cd9cfd1a"><div class="ttname"><a href="classSettings.html#aad3095391d8ffe6f92cfb957cd9cfd1a">Settings::GetBool</a></div><div class="ttdeci">static bool GetBool(const std::string &amp;Setting)</div><div class="ttdef"><b>Definition</b> <a href="Settings_8cpp_source.html#l00072">Settings.cpp:72</a></div></div>
-<div class="ttc" id="aclassSettings_html_ab14c9cd8c9e5eaa7af25ec97cf27cc06"><div class="ttname"><a href="classSettings.html#ab14c9cd8c9e5eaa7af25ec97cf27cc06">Settings::GetSizeT</a></div><div class="ttdeci">static std::size_t GetSizeT(const std::string &amp;Setting)</div><div class="ttdef"><b>Definition</b> <a href="Settings_8cpp_source.html#l00063">Settings.cpp:63</a></div></div>
-<div class="ttc" id="aclassSettings_html_ab63c4a00dca41753a6ad175ddce5d2e2"><div class="ttname"><a href="classSettings.html#ab63c4a00dca41753a6ad175ddce5d2e2">Settings::GetInt</a></div><div class="ttdeci">static int GetInt(const std::string &amp;Setting)</div><div class="ttdef"><b>Definition</b> <a href="Settings_8cpp_source.html#l00059">Settings.cpp:59</a></div></div>
+<div class="ttc" id="aclassSettings_html_aad3095391d8ffe6f92cfb957cd9cfd1a"><div class="ttname"><a href="classSettings.html#aad3095391d8ffe6f92cfb957cd9cfd1a">Settings::GetBool</a></div><div class="ttdeci">static bool GetBool(const std::string &amp;Setting)</div><div class="ttdef"><b>Definition</b> <a href="Settings_8cpp_source.html#l00077">Settings.cpp:77</a></div></div>
+<div class="ttc" id="aclassSettings_html_ab14c9cd8c9e5eaa7af25ec97cf27cc06"><div class="ttname"><a href="classSettings.html#ab14c9cd8c9e5eaa7af25ec97cf27cc06">Settings::GetSizeT</a></div><div class="ttdeci">static std::size_t GetSizeT(const std::string &amp;Setting)</div><div class="ttdef"><b>Definition</b> <a href="Settings_8cpp_source.html#l00068">Settings.cpp:68</a></div></div>
+<div class="ttc" id="aclassSettings_html_ab63c4a00dca41753a6ad175ddce5d2e2"><div class="ttname"><a href="classSettings.html#ab63c4a00dca41753a6ad175ddce5d2e2">Settings::GetInt</a></div><div class="ttdeci">static int GetInt(const std::string &amp;Setting)</div><div class="ttdef"><b>Definition</b> <a href="Settings_8cpp_source.html#l00064">Settings.cpp:64</a></div></div>
 <div class="ttc" id="aclassSettings_html_af79c343cdf38acd62c460d1299e937d3"><div class="ttname"><a href="classSettings.html#af79c343cdf38acd62c460d1299e937d3">Settings::GetString</a></div><div class="ttdeci">static std::string GetString(const std::string &amp;Setting)</div><div class="ttdef"><b>Definition</b> <a href="Settings_8cpp_source.html#l00040">Settings.cpp:40</a></div></div>
 <div class="ttc" id="aclassTrackingVolume_html"><div class="ttname"><a href="classTrackingVolume.html">TrackingVolume</a></div><div class="ttdef"><b>Definition</b> <a href="TrackingVolume_8h_source.html#l00015">TrackingVolume.h:15</a></div></div>
 <div class="ttc" id="aclassTrackingVolume_html_a5f4aa7a45429780422221b4ccf64da55"><div class="ttname"><a href="classTrackingVolume.html#a5f4aa7a45429780422221b4ccf64da55">TrackingVolume::GetFieldStrength</a></div><div class="ttdeci">double GetFieldStrength() const</div><div class="ttdef"><b>Definition</b> <a href="TrackingVolume_8cpp_source.html#l00023">TrackingVolume.cpp:23</a></div></div>

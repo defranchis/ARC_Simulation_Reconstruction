@@ -16,7 +16,7 @@ var searchData=
   ['m_5fhitposition_13',['m_HitPosition',['../structPhotonHit.html#a7d38b4875694d81454916ba5809fa681',1,'PhotonHit']]],
   ['m_5fmirrorcentre_14',['m_MirrorCentre',['../classRadiatorCell.html#ac613d408e427328eb65a2b11d70d7ee8',1,'RadiatorCell']]],
   ['m_5fmirrorcurvature_15',['m_MirrorCurvature',['../classRadiatorCell.html#a35fbfe125eb3cec0ba6126915154499e',1,'RadiatorCell']]],
-  ['m_5fnotvalidcells_16',['m_NotValidCells',['../classEndCapRadiatorCell.html#a3cd44487766d4eb0c9b40c93cc33bd24',1,'EndCapRadiatorCell']]],
+  ['m_5fnotvalidcells_16',['m_NotValidCells',['../classEndCapRadiatorCell.html#aa5855781cdc6030dc104a68582caf23e',1,'EndCapRadiatorCell']]],
   ['m_5fnumbermainrowcells_17',['m_NumberMainRowCells',['../classRadiatorArray.html#a3f8618536da4ee29af8f3851e74e9d89',1,'RadiatorArray']]],
   ['m_5fphoton_18',['m_Photon',['../structReconstructedPhoton.html#a3c03f28edfabddbb11fe1f5101148c0a',1,'ReconstructedPhoton::m_Photon'],['../structPhotonHit.html#a7177a9564df89e43be47842dfa11e979',1,'PhotonHit::m_Photon']]],
   ['m_5fposition_19',['m_Position',['../classParticle.html#aa06e33185c27f6bf62a6762cb8a3010a',1,'Particle::m_Position'],['../classRadiatorCell.html#aa841792dc827e3e70b3cd176a4a2a4a5',1,'RadiatorCell::m_Position']]],
