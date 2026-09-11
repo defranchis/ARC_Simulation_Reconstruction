@@ -60,6 +60,10 @@ class Settings {
   static bool Exists(const std::string &Setting);
  private:
   /**
+   * Get the whole stored line of a setting, including any trailing tokens
+   */
+  static std::string GetRawString(const std::string &Setting);
+  /**
    * Map where keys are name of settings file and values are maps with settings
    */
   static std::unordered_map<std::string, ssMap> m_Settings;

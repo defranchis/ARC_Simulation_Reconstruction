@@ -102,7 +102,8 @@ void SiPM::PlotHits(const std::string &Filename,
   Graph_Aerogel.Draw("AP");
   Graph_Gas.Draw("P SAME");
   TLegend Legend(0.7, 0.8, 0.9, 0.9);
-  const int Momentum = Settings::GetInt("Particle/Momentum");
+  // The momentum is a double setting, the legend rounds it to whole GeV
+  const int Momentum = static_cast<int>(Settings::GetDouble("Particle/Momentum"));
   const std::string AerogelLabel = "Aerogel " + std::to_string(Momentum) + " GeV";
   Legend.AddEntry(&Graph_Aerogel, AerogelLabel.c_str(), "P");
   const std::string GasLabel = "Gas " + std::to_string(Momentum) + " GeV";
