@@ -227,8 +227,10 @@ int main(int argc, char *argv[]) {
                                       Photon::Radiator::Gas;
     const int Hypothesis1 = Settings::GetInt("General/MassHypothesis1");
     const int Hypothesis2 = Settings::GetInt("General/MassHypothesis2");
+    // At least every track, so that a run with fewer than ten tracks works
+    const std::size_t ProgressStep = std::max(NumberTracks/10, std::size_t{1});
     for(std::size_t i = 0; i < NumberTracks; i++) {
-      if(i%(NumberTracks/10) == 0) {
+      if(i%ProgressStep == 0) {
 	std::cout << 100*i/NumberTracks;
 	std::cout << "%\n";
       }

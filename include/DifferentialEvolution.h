@@ -9,7 +9,8 @@
 
 #include <iostream>
 #include <vector>
-#include <cassert>
+#include <stdexcept>
+#include <string>
 #include <random>
 #include <iomanip>
 #include <utility>
@@ -87,13 +88,19 @@ namespace de
             m_F(0.8),
             m_CR(0.9),
             m_bestAgentIndex(0),
-            m_minCost(-std::numeric_limits<double>::infinity()),
+            m_minCost(std::numeric_limits<double>::infinity()),
             m_shouldCheckConstraints(shouldCheckConstraints),
             m_callback(callback),
             m_terminationCondition(terminationCondition)
         {
             m_generator.seed(randomSeed);
-            assert(m_populationSize >= 4);
+            // Three distinct agents other than the current one are needed
+            if (m_populationSize < 4)
+            {
+                throw std::invalid_argument(
+                    "Differential evolution needs at least 4 agents, but got "
+                    + std::to_string(m_populationSize));
+            }
 
             m_numberOfParameters = m_cost.NumberOfParameters();
 
